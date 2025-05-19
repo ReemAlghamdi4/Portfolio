@@ -684,7 +684,7 @@ text-align: center;
     dotsContainer.innerHTML = '';
     slides.forEach((_, index) => {
       const dot = document.createElement('button');
-      dot.setAttribute('aria-label', Slide ${index + 1});
+      dot.setAttribute('aria-label', `Slide ${index + 1}`);
       dot.setAttribute('role', 'tab');
       dot.classList.add('dot-btn');
       if(index === 0) dot.classList.add('active');
@@ -700,7 +700,7 @@ text-align: center;
   function goToSlide(index) {
     currentSlide = index;
     const slideWidth = slides[0].offsetWidth + 20; // عرض الشريحة + الفجوة (gap)
-    slidesContainer.style.transform = translateX(-${slideWidth * currentSlide}px);
+    slidesContainer.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
     updateDots();
   }
 
