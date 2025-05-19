@@ -76,12 +76,16 @@
   nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 1.15rem;
-    padding: 6px 14px;
     border-radius: 8px;
     transition: background 0.3s ease, color 0.3s ease;
     z-index: 1002;
     display: block;
+    font-size: 1rem; /* تصغير حجم الخط */
+    padding: 10px 8px;
+    white-space: nowrap; /* منع كسر النص */
+    width: 100%; /* عرض كامل لكل رابط */
+    text-align: center; /* توسيط النص */
+  
   }
   nav a:hover,
   nav a:focus {
@@ -90,7 +94,6 @@
     outline: none;
   }
   .lang-switch {
-    position: absolute;
     left: 20px;
     background: #d6336c;
     border: none;
@@ -102,6 +105,10 @@
     font-size: 1rem;
     transition: background 0.3s ease;
     z-index: 1002;
+	      position: static;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
   }
   .lang-switch:hover,
   .lang-switch:focus {
@@ -338,11 +345,12 @@ text-align: center;
     color: #d6336c;
     outline: none;
   }
-  @media(max-width: 960px){
-    .container {
-      margin: 90px 15px 20px;
-      padding: 30px 25px 60px;
-    }
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;  /* عرض روابط النافيشن عموديًا بدلًا من أفقي */
+    gap: 10px;
+    padding: 0.8rem 10px;
+  }
     h2 {
       font-size: 2rem;
     }
