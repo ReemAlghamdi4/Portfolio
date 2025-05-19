@@ -343,6 +343,25 @@ text-align: center;
       margin: 90px 15px 20px;
       padding: 30px 25px 60px;
     }
+  nav {
+    flex-wrap: wrap;        /* السماح للروابط بالانتقال للسطر التالي إذا ضاقت المساحة */
+    gap: 8px;               /* تقليل المسافة بين الروابط */
+    padding: 0.5rem 10px;
+  }
+  nav a {
+    font-size: 0.9rem;      /* تصغير حجم الخط */
+    padding: 5px 8px;       /* تقليل الحشو */
+    white-space: normal;    /* السماح للنص يلتف داخل الرابط بدل أن يقطع */
+    min-width: 90px;        /* عرض أدنى للرابط ليكون واضح */
+    text-align: center;
+  }
+  .lang-switch {
+    position: static;
+    margin: 5px 10px 0 0;
+    padding: 5px 12px;
+    font-size: 0.9rem;
+  }
+
     h2 {
       font-size: 2rem;
     }
