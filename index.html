@@ -370,26 +370,27 @@ text-align: center;
       flex: 0 0 90%;
     }
   }
-	@media (max-width: 600px) {
+@media (max-width: 600px) {
   nav {
-    flex-direction: column;  /* عرض روابط النافيشن عموديًا بدلًا من أفقي */
-    gap: 10px;
-    padding: 0.8rem 10px;
+    flex-wrap: wrap;        /* السماح للروابط بالانتقال للسطر التالي إذا ضاقت المساحة */
+    gap: 8px;               /* تقليل المسافة بين الروابط */
+    padding: 0.5rem 10px;
   }
   nav a {
-    font-size: 1rem; /* تصغير حجم الخط */
-    padding: 10px 8px;
-    white-space: nowrap; /* منع كسر النص */
-    width: 100%; /* عرض كامل لكل رابط */
-    text-align: center; /* توسيط النص */
+    font-size: 0.9rem;      /* تصغير حجم الخط */
+    padding: 5px 8px;       /* تقليل الحشو */
+    white-space: normal;    /* السماح للنص يلتف داخل الرابط بدل أن يقطع */
+    min-width: 90px;        /* عرض أدنى للرابط ليكون واضح */
+    text-align: center;
   }
   .lang-switch {
     position: static;
-    margin-bottom: 10px;
-    width: 100%;
-    text-align: center;
+    margin: 5px 10px 0 0;
+    padding: 5px 12px;
+    font-size: 0.9rem;
   }
 }
+
 
   .phone {
   text-align:left !important;}
