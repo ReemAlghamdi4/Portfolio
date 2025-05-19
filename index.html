@@ -370,6 +370,27 @@ text-align: center;
       flex: 0 0 90%;
     }
   }
+	@media (max-width: 600px) {
+  nav {
+    flex-direction: column;  /* عرض روابط النافيشن عموديًا بدلًا من أفقي */
+    gap: 10px;
+    padding: 0.8rem 10px;
+  }
+  nav a {
+    font-size: 1rem; /* تصغير حجم الخط */
+    padding: 10px 8px;
+    white-space: nowrap; /* منع كسر النص */
+    width: 100%; /* عرض كامل لكل رابط */
+    text-align: center; /* توسيط النص */
+  }
+  .lang-switch {
+    position: static;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+}
+
   .phone {
   text-align:left !important;}
 </style>
