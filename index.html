@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>portfolio Reem</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+<style>
+  /* قواعد عامة */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #0d1b2a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+  }
+  /* الخلفيات */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 220px;
+    height: 220px;
+    background: rgba(214, 51, 108, 0.1);
+    clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%);
+    filter: blur(35px);
+    animation: swirl 9s ease-in-out infinite;
+    z-index: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    bottom: 15%;
+    right: 10%;
+    width: 250px;
+    height: 250px;
+    background: rgba(26, 188, 156, 0.1);
+    clip-path: polygon(50% 0%, 80% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 20% 30%);
+    filter: blur(30px);
+    animation: swirlReverse 7s ease-in-out infinite;
+    z-index: 0;
+  }
+  @keyframes swirl {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(20deg) translateY(10px); }
+  }
+  @keyframes swirlReverse {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    50% { transform: rotate(-20deg) translateY(-15px); }
+  }
+
+  nav {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    background: rgba(10, 22, 33, 0.95);
+    border-bottom: 3px solid #d6336c;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 0;
+    z-index: 1001;
+    align-items: center;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transition: direction 0.3s ease;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.15rem;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 1002;
+    display: block;
+  }
+  nav a:hover,
+  nav a:focus {
+    background: #d6336c;
+    color: #fff;
+    outline: none;
+  }
+  .lang-switch {
+    position: absolute;
+    left: 20px;
+    background: #d6336c;
+    border: none;
+    color: white;
+    padding: 7px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+    z-index: 1002;
+  }
+  .lang-switch:hover,
+  .lang-switch:focus {
+    background: #b82c5a;
+    outline: none;
+  }
+  .container {
+    width: 100%;
+    max-width: 1000px;
+  
+    padding: 40px 50px 70px;
+    margin: 90px 20px 20px;
+    border-radius: 12px;
+    direction: rtl;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+  }
+  section {
+    margin-bottom: 70px;
+    scroll-margin-top: 90px;
+  }
+  h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: none !important;
+    transition: text-align 0.3s ease;
+    text-align: start !important;
+  }
+  [dir="rtl"] h2 {
+    text-align: right !important;
+  }
+  [dir="ltr"] h2 {
+    text-align: left !important;
+  }
+  p {
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    color: #d1d1d1;
+    transition: text-align 0.3s ease;
+  }
+  section#services ul,
+  footer .contact-list {
+    direction: rtl;
+  }
+  [dir="ltr"] section#services ul,
+  [dir="ltr"] footer .contact-list {
+    direction: ltr;
+    list-style-position: inside;
+  }
+  ul {
+    list-style: inside disc;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    color: #d1d1d1;
+    font-size: 1.15rem;
+    transition: text-align 0.3s ease;
+  }
+  .contact-list li a {
+    color: #1abc9c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .contact-list li a:hover,
+  .contact-list li a:focus {
+    color: #d6336c;
+    outline: none;
+  }
+  .tech-list {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    direction: ltr;
+  }
+  .tech-list span {
+    background: #1abc9c;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: 700;
+    color: #0d1b2a;
+    font-size: 1.1rem;
+    cursor: default;
+    transition: background 0.3s ease;
+  }
+  .tech-list span:hover {
+    background: #16a085;
+  }
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .work-card {
+    border-radius: 15px;
+    box-shadow: 0 0 14px #1abc9caa;
+    padding: 10px;
+    color: #d1d1d1;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    transition: box-shadow 0.3s ease;
+	text-align: center;
+  }
+  .work-card:hover {
+    box-shadow: 0 0 20px #16a085cc;
+  }
+  .work-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  
+  }
+  .work-card h4 {
+    color: #d6336c;
+    margin-bottom: 8px;
+text-align: center;
+  }
+  .work-card p {
+    font-size: 1rem;
+    transition: text-align 0.3s ease;
+  }
+  .certificates-slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+
+    padding: 20px 0 40px;
+    text-align: center;
+    direction: ltr;
+
+		    box-shadow: 0 0 14px #1abc9caa;
+
+  }
+  .certificates-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    user-select: none;
+    gap: 20px;
+    padding: 0 20px;
+  }
+  .certificate-slide {
+    flex: 0 0 300px;
+
+ 
+    color: #0d1b2a;
+    padding: 25px 15px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: default;
+  }
+  .certificate-slide img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+  }
+  /* إظهار الفقرة أسفل الصورة */
+  .certificate-slide p {
+    display: block;
+       margin-bottom: 0px;
+	margin-top: 8px;
+	
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .slider-dots {
+    text-align: center;
+    margin-top: 18px;
+    direction: ltr;
+  }
+  .slider-dots button {
+    background: #1abc9c;
+    border: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin: 0 8px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .slider-dots button.active {
+    opacity: 1;
+    transform: scale(1.3);
+    box-shadow: 0 0 8px #1abc9c;
+  }
+  footer {
+    background: #0a1621;
+    padding: 30px 20px;
+    text-align: center;
+    font-family: 'Cairo', sans-serif;
+    border-top: 3px solid #d6336c;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  footer .footer-contact h2 {
+  
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    text-align: right;
+    transition: text-align 0.3s ease;
+  }
+  [dir="ltr"] footer .footer-contact h2 {
+    text-align: left;
+  }
+  footer .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 400px;
+    direction: rtl;
+    transition: direction 0.3s ease, text-align 0.3s ease;
+  }
+
+  footer .contact-list li {
+    margin-bottom: 12px;
+    font-size: 1.15rem;
+  }
+  footer .contact-list li a {
+    color: #1abc9c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  footer .contact-list li a:hover,
+  footer .contact-list li a:focus {
+    color: #d6336c;
+    outline: none;
+  }
+  @media(max-width: 960px){
+    .container {
+      margin: 90px 15px 20px;
+      padding: 30px 25px 60px;
+    }
+    h2 {
+      font-size: 2rem;
+    }
+    p, ul {
+      font-size: 1rem;
+    }
+    .tech-list {
+      justify-content: center;
+    }
+    nav {
+      gap: 1.2rem;
+      padding: 1rem 15px;
+    }
+    .contact-list {
+      text-align: center;
+    }
+    .work-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .certificates-slides {
+      padding: 0 10px;
+    }
+    .certificate-slide {
+      flex: 0 0 90%;
+    }
+  }
+  .phone {
+  text-align:left !important;}
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="lang-switch" id="lang-switch" aria-label="تبديل اللغة">English</button>
+
+  <a href="#about" data-key="nav-about">من أنا</a>
+  <a href="#services" data-key="nav-services">ماذا أقدم</a>
+  <a href="#tech" data-key="nav-tech">التقنيات المستخدمة</a>
+  <a href="#work" data-key="nav-work">الأعمال</a>
+  <a href="#certifications" data-key="nav-contact-2">الدورات والشهادات</a>
+</nav>
+
+<div class="container" id="container">
+  <section id="about">
+    <h2 data-key="about-title">من أنا</h2>
+    <p data-key="about-text" id="about-text" style="text-align: right;">
+مرحباً! أنا ريم الغامدي، خريجة جديدة لعام 2024 من جامعة الأميرة نورة في تخصص نظم المعلومات، بمعدل 4.56 ومرتبة الشرف الثانية.
+أعمل بحب وشغف كمطورة تطبيقات ومواقع، وأؤمن أن البساطة هي سر الجمال الحقيقي. أحب تحويل الأفكار إلى تجارب رقمية مبتكرة تساعد في تسهيل الحياة وجعلها أكثر كفاءة ومتعة.
+بالنسبة لي، التقنية ليست مجرد أكواد، بل هي وسيلتي لصنع حلول عملية وأنيقة تخدم المستخدمين بطريقة أفضل.    </p>
+  </section>
+
+  <section id="services">
+    <h2 data-key="services-title">ماذا أقدم</h2>
+    <ul id="services-list">
+      <li>تطوير واجهات المستخدم الخاصة بالتطبيقات والمواقع مع التركيز على تحسين تجربة المستخدم.</li>
+      <li>استخدام جافا، بايثون، سويفت، ودارت في البرمجة.</li>
+      <li>إدارة قواعد البيانات باستخدام SQL.</li>
+      <li>تحليل البيانات لاستخراج الأنماط التي تساهم في تحسين القرارات.</li>
+    </ul>
+  </section>
+
+  <section id="tech">
+    <h2 data-key="tech-title">التقنيات المستخدمة</h2>
+    <div class="tech-list" id="tech-list">
+      <span>PHP</span>
+      <span>MySQL</span>
+      <span>Dart</span>
+      <span>Swift</span>
+      <span>Java</span>
+      <span>JavaScript</span>
+      <span>CSS</span>
+      <span>HTML</span>
+      <span>Angular</span>
+      <span>Python</span>
+      <span>Visual Studio</span>
+      <span>Figma</span>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2 data-key="work-title">الأعمال</h2>
+    <div class="work-grid" aria-label="شبكة أعمالي">
+      <div class="work-card">
+	  <a href="C:\Users\uDytr\Desktop\Screen Shot 1445-09-16 at 10.07.50 AM.png">
+        <img src="C:\Users\uDytr\Desktop\Screen Shot 1445-09-16 at 10.07.50 AM.png" alt="مشروع 1: موقع وزارة الاقتصاد والتخطيط" /> </a>
+        <h4 data-key="work-slide1-title">تعديل واجهة موقع تابع لوزارة الاقتصاد والتخطيط</h4>
+        <p data-key="work-slide1-text">عملت على تحسين تجربة المستخدم وتصميم واجهات متميزة، وربط الواجهات بـ API لجلب البيانات بشكل ديناميكي.</p>
+      </div>
+      <div class="work-card">
+	  <a href="C:\Users\uDytr\Desktop\Picture1.png">
+        <img src="C:\Users\uDytr\Desktop\Picture1.png" alt="مشروع 2: معرض أعمال باستخدام Angular" /> </a>
+        <h4 data-key="work-slide2-title">أول موقع طورته باستخدام Angular</h4>
+        <p data-key="work-slide2-text">معرض لأعمالي يتميز بتصميم بسيط وتفاعل سلس مع المستخدم.</p>
+      </div>
+      <div class="work-card">
+	  <a href="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 185426.png">
+        <img src="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 185426.png" alt="مشروع 3: تطبيق سواب جوي" /> </a>
+        <h4 data-key="work-slide3-title">مشروع تخرجي: تطبيق "سواب جوي"</h4>
+        <p data-key="work-slide3-text">تطبيق لتبادل والتبرع بالألعاب، طورته باستخدام لغة دارت، يتيح للمستخدمين استبدال أو التبرع بالألعاب بطريقة سهلة وآمنة.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2 data-key="contact-title-2">الدورات والشهادات</h2>
+    <div class="certificates-slider" aria-label="سلايدر الشهادات">
+      <div class="certificates-slides" id="certificates-slides">
+       <div class="certificate-slide">
+  <a href="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184029.png">
+    <img src="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184029.png" alt="Microsoft Office" />
+  </a>
+  <p>Microsoft Office Certification</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Downloads\certificate (3).png">
+    <img src="C:\Users\uDytr\Downloads\certificate (3).png" alt="UX/UI Design" />
+  </a>
+  <p>UX/UI Design Course</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Downloads\certificate (1).png">
+    <img src="C:\Users\uDytr\Downloads\certificate (1).png" alt="Swift" />
+  </a>
+  <p>Swift 1.0 Programming Certificate</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Downloads\certificate (2).png">
+    <img src="C:\Users\uDytr\Downloads\certificate (2).png" alt="Swift" />
+  </a>
+  <p>Swift 1.2 Programming Certificate</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Downloads\certificate.png">
+    <img src="C:\Users\uDytr\Downloads\certificate.png" alt="Swift" />
+  </a>
+  <p>Swift 1.3 Programming Certificate</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184029.png">
+    <img src="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184029.png" alt="Web Development" />
+  </a>
+  <p>Web Development Certificate</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 172334.png">
+    <img src="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 172334.png" alt="Data Warehouse" />
+  </a>
+  <p>Data Warehouse Course</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184016.png">
+    <img src="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184016.png" alt="Cyber Security" />
+  </a>
+  <p>Introduction to Cyber Security</p>
+</div>
+
+<div class="certificate-slide">
+  <a href="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184029.png">
+    <img src="C:\Users\uDytr\Pictures\Screenshots\Screenshot 2025-05-19 184029.png" alt="HTML Essentials" />
+  </a>
+  <p>HTML Essentials Course</p>
+</div>
+
+      </div>
+      <div class="slider-dots" id="cert-dots" role="tablist" aria-label="نقاط تنقل سلايدر الشهادات"></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-contact">
+    <h2 data-key="contact-title">تواصل معي</h2>
+    <ul class="contact-list">
+
+      <li><strong data-key="contact-email-label">البريد الإلكتروني:</strong> <a href="mailto:ireemahmed2@gmail.com">ireemahmed2@gmail.com</a></li>
+      <li><strong data-key="contact-linkedin-label">لينكدإن:</strong> <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  const translations = {
+    ar: {
+      "nav-about": "من أنا",
+      "nav-services": "ماذا أقدم",
+      "nav-tech": "التقنيات المستخدمة",
+      "nav-work": "الأعمال",
+      "nav-contact-2": "الدورات والشهادات",
+      "about-title": "من أنا",
+"about-text": "مرحباً! أنا ريم الغامدي، خريجة جديدة لعام 2024 من جامعة الأميرة نورة في تخصص نظم المعلومات، بمعدل 4.56 ومرتبة الشرف الثانية.  أعمل بحب وشغف كمطورة تطبيقات ومواقع، وأؤمن أن البساطة هي سر الجمال الحقيقي. أحب تحويل الأفكار إلى تجارب رقمية مبتكرة تساعد في تسهيل الحياة وجعلها أكثر كفاءة ومتعة. بالنسبة لي، التقنية ليست مجرد أكواد، بل هي وسيلتي لصنع حلول عملية وأنيقة تخدم المستخدمين بطريقة أفضل.",      "services-title": "ماذا أقدم",
+      "services-list": [
+        "تطوير واجهات المستخدم الخاصة بالتطبيقات والمواقع مع التركيز على تحسين تجربة المستخدم.",
+        "استخدام جافا، بايثون، سويفت، ودارت في البرمجة.",
+        "إدارة قواعد البيانات باستخدام SQL.",
+        "تحليل البيانات لاستخراج الأنماط التي تساهم في تحسين القرارات."
+      ],
+      "tech-title": "التقنيات المستخدمة",
+      "work-title": "الأعمال",
+      "work-slide1-title": "تعديل واجهة موقع تابع لوزارة الاقتصاد والتخطيط",
+      "work-slide1-text": "عملت على تحسين تجربة المستخدم وتصميم واجهات متميزة، وربط الواجهات بـ API لجلب البيانات بشكل ديناميكي.",
+      "work-slide2-title": "أول موقع طورته باستخدام Angular",
+      "work-slide2-text": "معرض لأعمالي يتميز بتصميم بسيط وتفاعل سلس مع المستخدم.",
+      "work-slide3-title": "مشروع تخرجي: تطبيق \"سواب جوي\"",
+      "work-slide3-text": "تطبيق لتبادل والتبرع بالألعاب، طورته باستخدام لغة دارت، يتيح للمستخدمين استبدال أو التبرع بالألعاب بطريقة سهلة وآمنة.",
+      "contact-title-2": "الدورات والشهادات",
+      "contact-title": "تواصل معي",
+  
+      "contact-email-label": "البريد الإلكتروني:",
+      "contact-linkedin-label": "لينكدإن:"
+    },
+    en: {
+      "nav-about": "About Me",
+      "nav-services": "What I Offer",
+      "nav-tech": "Technologies",
+      "nav-work": "Work",
+      "nav-contact-2": "Courses & Certifications",
+      "about-title": "About Me",
+      "about-text": "Hello! I am Reem Alghamdi, a recent graduate in 2024 from Princess Nourah University in Information Systems, with a GPA of 4.56 and Second Honors. I work passionately as an application and web developer, believing that simplicity is the essence of beauty, and I love transforming ideas into innovative digital experiences that make life easier and more efficient. For me, technology is not just code but a means to create practical and elegant solutions that better serve users.",
+      "services-title": "What I Offer",
+      "services-list": [
+        "Developing user interfaces for applications and websites with a focus on improving user experience.",
+        "Using Java, Python, Swift, and Dart for programming.",
+        "Managing databases using SQL.",
+        "Analyzing data to extract patterns that help improve decisions."
+      ],
+      "tech-title": "Technologies",
+      "work-title": "Work",
+      "work-slide1-title": "UI update for Ministry of Economy and Planning website",
+      "work-slide1-text": "Improved user experience and designed distinctive interfaces, connecting them dynamically with APIs.",
+      "work-slide2-title": "My first site developed using Angular",
+      "work-slide2-text": "A portfolio website featuring a simple design and smooth user interaction.",
+      "work-slide3-title": "Graduation Project: Swap Joy App",
+      "work-slide3-text": "An app for exchanging and donating games, developed with Dart, allowing users to easily and securely swap or donate games.",
+      "contact-title-2": "Courses & Certifications",
+      "contact-title": "Contact Me",
+
+      "contact-email-label": "Email:",
+      "contact-linkedin-label": "LinkedIn:"
+    }
+  };
+
+  let currentLang = 'ar';
+
+  function updateTexts() {
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if(translations[currentLang][key]) {
+        el.innerHTML = translations[currentLang][key].replace(/\n/g, '<br>');
+      }
+    });
+
+    const container = document.getElementById('container');
+    container.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+
+    const aboutText = document.getElementById('about-text');
+    aboutText.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
+
+    const servicesList = document.getElementById('services-list');
+    servicesList.innerHTML = '';
+    translations[currentLang]["services-list"].forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      servicesList.appendChild(li);
+    });
+    servicesList.style.direction = currentLang === 'ar' ? 'rtl' : 'ltr';
+    servicesList.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
+
+    const contactList = document.querySelector('footer .contact-list');
+    contactList.style.direction = currentLang === 'ar' ? 'rtl' : 'ltr';
+    contactList.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
+    contactList.querySelectorAll('li strong').forEach((strong, i) => {
+      const keys = ["contact-email-label", "contact-linkedin-label"];
+      strong.textContent = translations[currentLang][keys[i]];
+    });
+
+    const langSwitchBtn = document.getElementById('lang-switch');
+    langSwitchBtn.textContent = currentLang === 'ar' ? 'English' : 'العربية';
+
+    const workCards = document.querySelectorAll('.work-card h3');
+    const workTexts = document.querySelectorAll('.work-card p');
+    if(currentLang === 'ar') {
+      workCards[0].textContent = translations.ar["work-slide1-title"];
+      workTexts[0].textContent = translations.ar["work-slide1-text"];
+      workCards[1].textContent = translations.ar["work-slide2-title"];
+      workTexts[1].textContent = translations.ar["work-slide2-text"];
+      workCards[2].textContent = translations.ar["work-slide3-title"];
+      workTexts[2].textContent = translations.ar["work-slide3-text"];
+    } else {
+      workCards[0].textContent = translations.en["work-slide1-title"];
+      workTexts[0].textContent = translations.en["work-slide1-text"];
+      workCards[1].textContent = translations.en["work-slide2-title"];
+      workTexts[1].textContent = translations.en["work-slide2-text"];
+      workCards[2].textContent = translations.en["work-slide3-title"];
+      workTexts[2].textContent = translations.en["work-slide3-text"];
+    }
+
+    // تحديث اتجاه النافقيشن بار والعناوين داخله
+    const nav = document.querySelector('nav');
+    const navLinks = nav.querySelectorAll('a');
+    if(currentLang === 'ar') {
+      nav.style.direction = 'rtl';
+      navLinks.forEach(link => link.style.textAlign = 'right');
+    } else {
+      nav.style.direction = 'ltr';
+      navLinks.forEach(link => link.style.textAlign = 'left');
+    }
+  }
+
+  document.getElementById('lang-switch').addEventListener('click', () => {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    updateTexts();
+  });
+
+  window.addEventListener('DOMContentLoaded', () => {
+    updateTexts();
+  });
+
+  // سلايدر الشهادات مع انتقال تلقائي ونقاط تنقل
+
+  const slidesContainer = document.getElementById('certificates-slides');
+  const slides = document.querySelectorAll('.certificate-slide');
+  const dotsContainer = document.getElementById('cert-dots');
+
+  let currentSlide = 0;
+
+  // إنشاء نقاط التنقل بناءً على عدد الشرائح
+  function createDots() {
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.setAttribute('aria-label', `Slide ${index + 1}`);
+      dot.setAttribute('role', 'tab');
+      dot.classList.add('dot-btn');
+      if(index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+        resetAutoSlide();
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  // الذهاب لشريحة معينة
+  function goToSlide(index) {
+    currentSlide = index;
+    const slideWidth = slides[0].offsetWidth + 20; // عرض الشريحة + الفجوة (gap)
+    slidesContainer.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
+    updateDots();
+  }
+
+  // تحديث حالة النقاط (تفعيل/تعطيل)
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('button');
+    dots.forEach(dot => dot.classList.remove('active'));
+    if(dots[currentSlide]) dots[currentSlide].classList.add('active');
+  }
+
+  // انتقال تلقائي كل 5 ثواني
+  let autoSlideInterval = setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    goToSlide(currentSlide);
+  }, 5000);
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      goToSlide(currentSlide);
+    }, 5000);
+  }
+
+  // بدء العمل
+  createDots();
+  goToSlide(0);
+</script>
+
+</body>
+</html>
