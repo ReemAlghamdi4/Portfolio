@@ -1,753 +1,752 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Portfolio Reem</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ريم الغامدي — Portfolio OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
-  /* قواعد عامة */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: #0d1b2a;
-    color: #e0e0e0;
-    min-height: 100vh;
-    scroll-behavior: smooth;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    overflow-x: hidden;
-  }
-  /* الخلفيات */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 10%;
-    left: 5%;
-    width: 220px;
-    height: 220px;
-    background: rgba(214, 51, 108, 0.1);
-    clip-path: polygon(0 0, 100% 20%, 80% 100%, 0 80%);
-    filter: blur(35px);
-    animation: swirl 9s ease-in-out infinite;
-    z-index: 0;
-  }
-  body::after {
-    content: "";
-    position: fixed;
-    bottom: 15%;
-    right: 10%;
-    width: 250px;
-    height: 250px;
-    background: rgba(26, 188, 156, 0.1);
-    clip-path: polygon(50% 0%, 80% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 20% 30%);
-    filter: blur(30px);
-    animation: swirlReverse 7s ease-in-out infinite;
-    z-index: 0;
-  }
-  @keyframes swirl {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    50% { transform: rotate(20deg) translateY(10px); }
-  }
-  @keyframes swirlReverse {
-    0%, 100% { transform: rotate(0deg) translateY(0); }
-    50% { transform: rotate(-20deg) translateY(-15px); }
-  }
+.dapp-icon img{width:100%;height:100%;object-fit:contain;border-radius:inherit;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pink:#F0A6CC;--pink-soft:rgba(229,143,185,0.14);--pink-text:#F2A9C4;
+  --orange:#FF8A5C;--horror:#0D0008;--sky:#7EB8F7;--yellow:#F5C842;
+  --bg:#08061A;--glass:rgba(24,19,52,0.72);
+  --border:rgba(255,255,255,0.08);--border-mid:rgba(255,255,255,0.16);
+  --text:#EDEAFB;--muted:#ABA4CE;--hint:#7B74A8;
+  --radius:14px;--win-radius:16px;
+}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'IBM Plex Sans Arabic','IBM Plex Sans',sans-serif;}
+body{background:var(--bg);direction:rtl;}
+body.en{direction:ltr;font-family:'IBM Plex Sans','IBM Plex Sans Arabic',sans-serif;}
 
-  nav {
-    position: fixed;
-    top: 0; right: 0; left: 0;
-    background: rgba(10, 22, 33, 0.95);
-    border-bottom: 3px solid #d6336c;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 0;
-    z-index: 1001;
-    align-items: center;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    transition: direction 0.3s ease;
-  }
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.15rem;
-    padding: 6px 14px;
-    border-radius: 8px;
-    transition: background 0.3s ease, color 0.3s ease;
-    z-index: 1002;
-    display: block;
-  }
-  nav a:hover,
-  nav a:focus {
-    background: #d6336c;
-    color: #fff;
-    outline: none;
-  }
-  .lang-switch {
-    position: absolute;
-    left: 20px;
-    background: #d6336c;
-    border: none;
-    color: white;
-    padding: 7px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-    z-index: 1002;
-  }
-  .lang-switch:hover,
-  .lang-switch:focus {
-    background: #b82c5a;
-    outline: none;
-  }
-  .container {
-    width: 100%;
-    max-width: 1000px;
-  
-    padding: 40px 50px 70px;
-    margin: 90px 20px 20px;
-    border-radius: 12px;
-    direction: rtl;
-    flex-grow: 1;
-    position: relative;
-    z-index: 1;
-  }
-  section {
-    margin-bottom: 70px;
-    scroll-margin-top: 90px;
-  }
-  h2 {
-    font-size: 2.4rem;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.5rem;
-    border-bottom: none !important;
-    transition: text-align 0.3s ease;
-    text-align: start !important;
-  }
-  [dir="rtl"] h2 {
-    text-align: right !important;
-  }
-  [dir="ltr"] h2 {
-    text-align: left !important;
-  }
-  p {
-    margin-bottom: 1.5rem;
-    font-size: 1.15rem;
-    color: #d1d1d1;
-    transition: text-align 0.3s ease;
-  }
-  section#services ul,
-  footer .contact-list {
-    direction: rtl;
-  }
-  [dir="ltr"] section#services ul,
-  [dir="ltr"] footer .contact-list {
-    direction: ltr;
-    list-style-position: inside;
-  }
-  ul {
-    list-style: inside disc;
-    margin-left: 10px;
-    margin-bottom: 20px;
-    color: #d1d1d1;
-    font-size: 1.15rem;
-    transition: text-align 0.3s ease;
-  }
-  .contact-list li a {
-    color: #1abc9c;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .contact-list li a:hover,
-  .contact-list li a:focus {
-    color: #d6336c;
-    outline: none;
-  }
-  .tech-list {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    direction: ltr;
-  }
-  .tech-list span {
-    background: #1abc9c;
-    padding: 10px 22px;
-    border-radius: 20px;
-    font-weight: 700;
-    color: #0d1b2a;
-    font-size: 1.1rem;
-    cursor: default;
-    transition: background 0.3s ease;
-  }
-  .tech-list span:hover {
-    background: #16a085;
-  }
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .work-card {
-    border-radius: 15px;
-    box-shadow: 0 0 14px #1abc9caa;
-    padding: 10px;
-    color: #d1d1d1;
-    display: flex;
-    flex-direction: column;
-    cursor: default;
-    transition: box-shadow 0.3s ease;
-	text-align: center;
-  }
-  .work-card:hover {
-    box-shadow: 0 0 20px #16a085cc;
-  }
-  .work-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 10px;
-  
-  }
-  .work-card h4 {
-    color: #d6336c;
-    margin-bottom: 8px;
-text-align: center;
-  }
-  .work-card p {
-    font-size: 1rem;
-    transition: text-align 0.3s ease;
-  }
-  .certificates-slider {
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-
-    padding: 20px 0 40px;
-    text-align: center;
-    direction: ltr;
-
-		    box-shadow: 0 0 14px #1abc9caa;
-
-  }
-  .certificates-slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    user-select: none;
-    gap: 20px;
-    padding: 0 20px;
-  }
-  .certificate-slide {
-    flex: 0 0 300px;
-
- 
-    color: #0d1b2a;
-    padding: 25px 15px 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    cursor: default;
-  }
-  .certificate-slide img {
-    width: 100%;
-    height: 250px;
-    object-fit: contain;
-  }
-  /* إظهار الفقرة أسفل الصورة */
-  .certificate-slide p {
-    display: block;
-       margin-bottom: 0px;
-	margin-top: 8px;
-	
-    font-size: 0.9rem;
-    color: white;
-    font-weight: 600;
-    text-align: center;
-  }
-
-  .slider-dots {
-    text-align: center;
-    margin-top: 18px;
-    direction: ltr;
-  }
-  .slider-dots button {
-    background: #1abc9c;
-    border: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin: 0 8px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  .slider-dots button.active {
-    opacity: 1;
-    transform: scale(1.3);
-    box-shadow: 0 0 8px #1abc9c;
-  }
-  footer {
-    background: #0a1621;
-    padding: 30px 20px;
-    text-align: center;
-    font-family: 'Cairo', sans-serif;
-    border-top: 3px solid #d6336c;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-  }
-  footer .footer-contact h2 {
-  
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-    text-align: right;
-    transition: text-align 0.3s ease;
-  }
-  [dir="ltr"] footer .footer-contact h2 {
-    text-align: left;
-  }
-  footer .contact-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    max-width: 400px;
-    direction: rtl;
-    transition: direction 0.3s ease, text-align 0.3s ease;
-  }
-
-  footer .contact-list li {
-    margin-bottom: 12px;
-    font-size: 1.15rem;
-  }
-  footer .contact-list li a {
-    color: #1abc9c;
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  footer .contact-list li a:hover,
-  footer .contact-list li a:focus {
-    color: #d6336c;
-    outline: none;
-  }
-  @media(max-width: 960px){
-    .container {
-      margin: 90px 15px 20px;
-      padding: 30px 25px 60px;
-    }
-    h2 {
-      font-size: 2rem;
-    }
-    p, ul {
-      font-size: 1rem;
-    }
-    .tech-list {
-      justify-content: center;
-    }
-    nav {
-      gap: 1.2rem;
-      padding: 1rem 15px;
-    }
-    .contact-list {
-      text-align: center;
-    }
-    .work-grid {
-      grid-template-columns: 1fr;
-      gap: 30px;
-    }
-    .certificates-slides {
-      padding: 0 10px;
-    }
-    .certificate-slide {
-      flex: 0 0 90%;
-    }
-  }
-@media (max-width: 600px) {
-  nav {
-    flex-wrap: wrap;        /* السماح للروابط بالانتقال للسطر التالي إذا ضاقت المساحة */
-    gap: 8px;               /* تقليل المسافة بين الروابط */
-    padding: 0.5rem 10px;
-  }
-  nav a {
-    font-size: 0.9rem;      /* تصغير حجم الخط */
-    padding: 5px 8px;       /* تقليل الحشو */
-    white-space: normal;    /* السماح للنص يلتف داخل الرابط بدل أن يقطع */
-    min-width: 90px;        /* عرض أدنى للرابط ليكون واضح */
-    text-align: center;
-  }
-  .lang-switch {
-    position: static;
-    margin: 5px 10px 0 0;
-    padding: 5px 12px;
-    font-size: 0.9rem;
-  }
+#desktop{
+  width:100vw;height:100vh;position:relative;overflow:hidden;
+  background-color:#08061A;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse 60% 50% at 18% 22%,rgba(124,77,219,0.30) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 45% at 82% 74%,rgba(201,75,140,0.22) 0%,transparent 55%),
+    radial-gradient(ellipse 45% 40% at 62% 8%,rgba(66,140,245,0.16) 0%,transparent 50%),
+    radial-gradient(ellipse 40% 35% at 8% 85%,rgba(0,180,190,0.10) 0%,transparent 55%),
+    linear-gradient(180deg,#0C0826 0%,#060414 100%);
 }
 
+/* ── عناصر الفضاء الزخرفية ── */
+#space-deco{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.stars{position:absolute;inset:0;background-repeat:repeat;}
+.stars.s1{background-image:
+  radial-gradient(1px 1px at 25px 35px,rgba(255,255,255,0.9),transparent),
+  radial-gradient(1px 1px at 120px 90px,rgba(255,255,255,0.55),transparent),
+  radial-gradient(1.5px 1.5px at 200px 160px,rgba(255,255,255,0.8),transparent),
+  radial-gradient(1px 1px at 70px 200px,rgba(255,255,255,0.45),transparent),
+  radial-gradient(1px 1px at 180px 40px,rgba(230,220,255,0.7),transparent);
+  background-size:240px 240px;animation:twinkle 5s ease-in-out infinite alternate;}
+.stars.s2{background-image:
+  radial-gradient(1px 1px at 60px 120px,rgba(255,255,255,0.65),transparent),
+  radial-gradient(2px 2px at 150px 50px,rgba(255,214,240,0.7),transparent),
+  radial-gradient(1px 1px at 220px 220px,rgba(190,210,255,0.55),transparent),
+  radial-gradient(1.5px 1.5px at 30px 260px,rgba(255,255,255,0.6),transparent);
+  background-size:300px 300px;animation:twinkle 7s ease-in-out 1.4s infinite alternate;}
+@keyframes twinkle{from{opacity:0.45;}to{opacity:1;}}
+.planet{position:absolute;border-radius:50%;}
+.planet.p1{width:150px;height:150px;top:13%;left:5%;
+  background:radial-gradient(circle at 32% 30%,#C9A7F5 0%,#7C4DDB 45%,#2E1B66 82%);
+  box-shadow:inset -18px -14px 40px rgba(0,0,0,0.55),0 0 70px rgba(150,100,255,0.28);
+  animation:floaty 14s ease-in-out infinite;}
+.planet.p2{width:92px;height:92px;bottom:22%;right:6%;
+  background:radial-gradient(circle at 35% 30%,#FFD9A8 0%,#E8945A 50%,#7A3A22 88%);
+  box-shadow:inset -12px -10px 28px rgba(0,0,0,0.5),0 0 50px rgba(255,160,90,0.22);
+  animation:floaty 18s ease-in-out 2s infinite;}
+.planet.p2 .ring{display:block;position:absolute;top:50%;left:50%;width:172%;height:56%;transform:translate(-50%,-50%) rotate(-18deg);border:2px solid rgba(255,215,170,0.4);border-radius:50%;box-shadow:0 0 14px rgba(255,200,150,0.18);}
+.planet.p3{width:26px;height:26px;top:30%;right:16%;
+  background:radial-gradient(circle at 35% 30%,#B4F0E8 0%,#3FA8A0 60%,#1A5A56 90%);
+  box-shadow:0 0 24px rgba(90,220,205,0.35);
+  animation:floaty 10s ease-in-out 1s infinite;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+.shooting{position:absolute;top:16%;left:72%;width:130px;height:1.5px;border-radius:2px;
+  background:linear-gradient(90deg,rgba(255,255,255,0.95),transparent);
+  opacity:0;transform:rotate(-32deg);animation:shoot 9s linear 3s infinite;}
+@keyframes shoot{0%,90%{opacity:0;transform:translate(0,0) rotate(-32deg);}93%{opacity:1;}100%{opacity:0;transform:translate(-360px,210px) rotate(-32deg);}}
 
-  .phone {
-  text-align:left !important;}
+#menubar{position:fixed;top:0;left:0;right:0;height:44px;z-index:1000;background:rgba(12,9,32,0.7);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);display:flex;align-items:center;padding:0 20px;}
+.mb-right{margin-right:auto;display:flex;align-items:center;gap:16px;}
+body.en .mb-right{margin-right:0;margin-left:auto;}
+#clock{font-size:13px;color:var(--muted);}
+.lang-toggle{font-size:11px;padding:3px 10px;border:0.5px solid var(--border-mid);border-radius:20px;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .15s;}
+.lang-toggle:hover{color:var(--text);}
+
+#dock{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:999;background:rgba(18,13,44,0.62);backdrop-filter:blur(24px) saturate(1.4);border:0.5px solid rgba(255,255,255,0.16);border-radius:22px;padding:10px 16px;display:flex;align-items:flex-end;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 30px rgba(124,77,219,0.12),inset 0 1px 0 rgba(255,255,255,0.10);}
+.dock-sep{width:0.5px;background:var(--border-mid);align-self:stretch;margin:0 4px;}
+.dapp{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;position:relative;}
+.dapp-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;transition:transform .2s ease;box-shadow:0 2px 10px rgba(0,0,0,0.15);flex-shrink:0;}
+.dapp:hover .dapp-icon{transform:translateY(-10px) scale(1.15);}
+.dapp-label{font-size:10px;opacity:0;transition:opacity .15s;white-space:nowrap;position:absolute;bottom:calc(100% + 8px);background:rgba(30,28,26,0.8);color:#fff;padding:3px 8px;border-radius:6px;pointer-events:none;}
+.dapp:hover .dapp-label{opacity:1;}
+.dapp-dot{width:4px;height:4px;border-radius:50%;background:#C9B8FF;box-shadow:0 0 6px rgba(180,150,255,0.9);margin-top:2px;display:none;}
+.dapp.open .dapp-dot{display:block;}
+
+.ic-orange{background:linear-gradient(145deg,#FF8A5C,#FF5722);}
+.ic-horror{background:linear-gradient(145deg,#3D0018,#0D0008);}
+.ic-sky{background:linear-gradient(145deg,#f7c255,#f7c255);}
+.ic-yellow{background:linear-gradient(145deg,#FFD740,#F57F17);}
+.ic-neutral{background:linear-gradient(145deg,#D5D0C8,#B0AAA0);}
+.ic-pink{background:linear-gradient(145deg,#F48FB1,#C94B78);}
+.ic-teal{background:linear-gradient(145deg,#80DEEA,#00838F);}
+.ic-green{background:linear-gradient(145deg,#A5D6A7,#388E3C);}
+
+/* ── WINDOWS ── */
+.win{
+  position:absolute;
+  background:linear-gradient(160deg,rgba(255,255,255,0.10) 0%,rgba(160,130,255,0.06) 40%,rgba(40,28,90,0.28) 100%);
+  backdrop-filter:blur(32px) saturate(1.6);-webkit-backdrop-filter:blur(32px) saturate(1.6);
+  border:1px solid rgba(255,255,255,0.22);border-radius:var(--win-radius);
+  box-shadow:0 24px 70px rgba(0,0,0,0.45),0 0 50px rgba(140,100,255,0.12),inset 0 1px 0 rgba(255,255,255,0.25),inset 0 -1px 0 rgba(255,255,255,0.06);
+  display:none;flex-direction:column;min-width:320px;overflow:hidden;z-index:100;transition:box-shadow .2s;
+}
+.win.visible{display:flex;}
+.win.focused{z-index:500;border-color:rgba(255,255,255,0.30);box-shadow:0 30px 90px rgba(0,0,0,0.55),0 0 70px rgba(170,130,255,0.20),inset 0 1px 0 rgba(255,255,255,0.30),inset 0 -1px 0 rgba(255,255,255,0.06);}
+
+.win-bar{height:38px;display:flex;align-items:center;padding:0 14px;gap:8px;cursor:grab;user-select:none;flex-shrink:0;background:rgba(255,255,255,0.07);border-bottom:0.5px solid rgba(255,255,255,0.10);}
+.win-bar:active{cursor:grabbing;}
+.win-btns{display:flex;gap:6px;flex-shrink:0;}
+.wb{width:12px;height:12px;border-radius:50%;cursor:pointer;border:0.5px solid rgba(0,0,0,0.1);}
+.wb-close{background:#FF5F57;}.wb-min{background:#FFBD2E;}.wb-max{background:#28C840;}
+.win-title{flex:1;text-align:center;font-size:12px;font-weight:500;color:var(--muted);}
+
+.win-color-strip{height:120px;display:flex;align-items:center;justify-content:center;gap:14px;flex-shrink:0;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,0.09) 0%,rgba(170,130,255,0.07) 50%,rgba(255,255,255,0.02) 100%);border-bottom:0.5px solid rgba(255,255,255,0.08);}
+.win-color-strip::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");}
+.strip-logo{width:72px;height:72px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:36px;background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.28);box-shadow:0 6px 20px rgba(0,0,0,0.25),inset 0 1px 0 rgba(255,255,255,0.25);position:relative;z-index:1;overflow:hidden;}
+.strip-logo img{width:100%;height:100%;object-fit:cover;border-radius:inherit;}
+.strip-name{position:relative;z-index:1;font-size:22px;font-weight:500;color:#D9CCFF;letter-spacing:-.02em;text-shadow:0 0 22px rgba(180,150,255,0.5);}
+
+.win-body{padding:20px;overflow-y:auto;flex:1;}
+.win-body p{font-size:13.5px;color:var(--muted);line-height:1.85;margin-bottom:12px;font-weight:300;}
+.win-body p strong{color:var(--text);font-weight:500;}
+.win-section-divider{height:0.5px;background:var(--border);margin:14px 0;}
+.win-role-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;background:var(--pink-soft);color:var(--pink-text);border:0.5px solid rgba(201,75,120,0.18);border-radius:20px;padding:3px 10px;margin-bottom:10px;}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.tag{font-size:11px;padding:3px 9px;border:0.5px solid var(--border-mid);border-radius:20px;color:var(--muted);background:rgba(255,255,255,0.05);}
+
+/* ── SLIDESHOW ── */
+.proj-gallery{margin:14px 0 4px;}
+.proj-gallery-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--hint);margin-bottom:8px;}
+.slideshow-wrap{position:relative;border-radius:10px;overflow:hidden;user-select:none;direction:ltr;}
+.slides-track{display:flex;transition:transform .38s cubic-bezier(.4,0,.2,1);}
+.slide{min-width:100%;height:210px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+.slide img{width:100%;height:100%;object-fit:cover;display:block;}
+.slide-empty-inner{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.slide{background:rgba(255,255,255,0.03);}
+.slide-empty-inner span:first-child{font-size:26px;color:#8F88B8;}
+.slide-empty-inner span:last-child{font-size:11px;color:#7B74A8;}
+.slide-nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.42);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:3;transition:background .15s;}
+.slide-nav-btn:hover{background:rgba(0,0,0,0.68);}
+.slide-nav-btn.prev{left:8px;}
+.slide-nav-btn.next{right:8px;}
+.slide-counter-badge{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.45);color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;z-index:3;}
+.dots-row{display:flex;justify-content:center;gap:5px;padding:7px 0 4px;}
+.sdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.22);cursor:pointer;transition:all .2s;border:none;padding:0;}
+.sdot.active{background:rgba(220,200,255,0.85);box-shadow:0 0 8px rgba(180,150,255,0.6);width:16px;border-radius:3px;}
+.thumbs-row{display:flex;gap:5px;margin-top:4px;overflow-x:auto;padding-bottom:2px;}
+.thumbs-row::-webkit-scrollbar{height:3px;}
+.thumbs-row::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:3px;}
+.sthumb{width:46px;height:34px;border-radius:6px;object-fit:cover;border:1.5px solid transparent;cursor:pointer;flex-shrink:0;transition:border-color .15s;}
+.sthumb.active{border-color:var(--text);}
+.sthumb-empty{width:46px;height:34px;border-radius:6px;background:rgba(255,255,255,0.06);border:1px dashed var(--border-mid);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--hint);flex-shrink:0;}
+
+.appstore-btn{display:inline-flex;align-items:center;gap:8px;background:#000;color:#fff;border:0.5px solid rgba(255,255,255,0.25);border-radius:10px;padding:9px 16px;text-decoration:none;font-size:12px;margin-top:6px;transition:opacity .15s;}
+.appstore-btn:hover{opacity:0.82;}
+.appstore-btn svg{width:18px;height:18px;fill:#fff;flex-shrink:0;}
+.appstore-btn .abt1{font-size:9px;opacity:.7;display:block;}
+.appstore-btn .abt2{font-size:13px;font-weight:500;display:block;line-height:1.1;}
+
+.stat-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;}
+.stat-pill{background:rgba(255,255,255,0.05);border:0.5px solid var(--border-mid);border-radius:10px;padding:10px 14px;flex:1;min-width:80px;}
+.stat-pill .n{font-size:18px;font-weight:500;color:var(--text);text-shadow:0 0 14px rgba(180,150,255,0.5);}
+.stat-pill .l{font-size:11px;color:var(--muted);margin-top:2px;}
+
+.tool-section{margin-bottom:16px;}
+.tool-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--hint);margin-bottom:8px;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{font-size:12px;padding:5px 13px;border-radius:20px;border:0.5px solid var(--border-mid);color:var(--muted);background:rgba(255,255,255,0.05);}
+.chip.hl{transition:all 0.3s ease;}
+.chip.hl:hover{color:#fff;border-color:rgba(200,170,255,0.6);box-shadow:0 0 14px rgba(150,110,255,0.25);transform:scale(1.05);cursor:pointer;}
+
+.clink{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border);text-decoration:none;color:var(--muted);font-size:13px;transition:color .15s;cursor:pointer;}
+.clink:last-child{border-bottom:none;}
+.clink:hover{color:var(--text);}
+.clink-ic{width:32px;height:32px;border-radius:8px;border:0.5px solid var(--border-mid);background:rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+
+/* ── HERO (المحتوى على سطح المكتب مباشرة) ── */
+#hero{position:absolute;top:44px;bottom:96px;left:0;right:0;z-index:1;display:flex;overflow-y:auto;padding:24px 20px;}
+#hero::-webkit-scrollbar{width:4px;}
+#hero::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:4px;}
+#hero-inner{margin:auto;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;max-width:700px;width:100%;}
+#hero h1{font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--text);letter-spacing:-.03em;line-height:1.2;}
+#hero h1 > span{background:linear-gradient(100deg,#EDE6FF 10%,#F5BCDD 45%,#A8C8FF 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(170,130,255,0.4));}
+#hero h1 em{font-style:italic;font-family:'Playfair Display',serif;color:var(--pink);font-weight:400;font-size:0.62em;text-shadow:0 0 24px rgba(240,166,204,0.4);}
+.hero-about{max-width:620px;font-size:14px;color:var(--muted);line-height:1.95;font-weight:300;}
+.hero-about strong{color:var(--text);font-weight:500;}
+.hero-stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.hero-stats .stat-pill{flex:0 1 auto;min-width:120px;text-align:center;}
+.hero-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--hint);display:flex;align-items:center;gap:10px;}
+.hero-label::before,.hero-label::after{content:'';height:0.5px;width:34px;background:var(--border-mid);}
+.hero-block{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:620px;}
+.hero-contact{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.hero-contact a{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border:0.5px solid var(--border-mid);border-radius:20px;background:rgba(255,255,255,0.05);color:var(--muted);text-decoration:none;font-size:13px;transition:all .15s;}
+.hero-contact a:hover{color:var(--text);border-color:rgba(200,170,255,0.6);box-shadow:0 0 18px rgba(150,110,255,0.25);transform:translateY(-1px);}
+#hero .hint{font-size:12px;color:var(--hint);display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px;}
+
+.win-body::-webkit-scrollbar{width:4px;}
+.win-body::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:4px;}
+
+/* ── تكبير الصور (Lightbox) ── */
+.zoomable{cursor:zoom-in;}
+#lightbox{position:fixed;inset:0;background:rgba(12,9,8,0.88);backdrop-filter:blur(10px);z-index:3000;display:none;align-items:center;justify-content:center;padding:28px;cursor:zoom-out;}
+#lightbox.show{display:flex;}
+#lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:10px;box-shadow:0 24px 70px rgba(0,0,0,0.5);}
+#lightbox .lb-close{position:absolute;top:16px;left:16px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(255,255,255,0.14);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#lightbox .lb-close:hover{background:rgba(255,255,255,0.28);}
+
+/* ── نسخة الجوال ── */
+@media (max-width:768px){
+  #hero{bottom:84px;padding:16px 14px;}
+  #hero-inner{gap:14px;}
+  #hero h1{font-size:24px;}
+  .hero-about{font-size:13px;line-height:1.85;}
+  .hero-stats .stat-pill{min-width:96px;padding:8px 10px;}
+  .hero-stats .stat-pill .n{font-size:16px;}
+
+  /* النوافذ تفتح ملء الشاشة */
+  .win.visible{
+    position:fixed;left:0 !important;top:44px !important;right:0;
+    width:100vw !important;min-width:0;max-width:none;
+    height:calc(100vh - 44px);height:calc(100dvh - 44px);
+    border-radius:0;border-left:none;border-right:none;
+  }
+  .win-bar{cursor:default;}
+  .win-body{padding:16px 16px 110px;}
+  .win-color-strip{height:96px;}
+  .strip-logo{width:56px;height:56px;font-size:28px;border-radius:14px;}
+  .strip-name{font-size:18px;}
+
+  /* عناصر الفضاء أصغر وأبعد عن المحتوى */
+  .planet.p1{width:84px;height:84px;top:8%;left:-26px;}
+  .planet.p2{width:60px;height:60px;bottom:15%;right:-16px;}
+  .planet.p3{top:22%;right:8%;}
+  .shooting{display:none;}
+
+  /* الـ Dock يتقلص ويسمح بالتمرير الأفقي */
+  #dock{left:8px;right:8px;transform:none;bottom:10px;padding:8px 10px;gap:8px;overflow-x:auto;justify-content:flex-start;border-radius:18px;}
+  #dock::-webkit-scrollbar{display:none;}
+  .dapp-icon{width:44px;height:44px;font-size:22px;border-radius:12px;}
+  .dapp:hover .dapp-icon{transform:none;}
+  .dapp-label{display:none;}
+}
+@media (min-width:769px){
+  /* توسيط أيقونات الدوك عندما تكفي المساحة */
+  #dock{max-width:calc(100vw - 32px);}
+}
 </style>
 </head>
 <body>
 
-<nav>
-  <button class="lang-switch" id="lang-switch" aria-label="تبديل اللغة">English</button>
-
-  <a href="#about" data-key="nav-about">من أنا</a>
-  <a href="#services" data-key="nav-services">ماذا أقدم</a>
-  <a href="#tech" data-key="nav-tech">التقنيات المستخدمة</a>
-  <a href="#work" data-key="nav-work">الأعمال</a>
-  <a href="#certifications" data-key="nav-contact-2">الدورات والشهادات</a>
-</nav>
-
-<div class="container" id="container">
-  <section id="about">
-    <h2 data-key="about-title">من أنا</h2>
-    <p data-key="about-text" id="about-text" style="text-align: right;">
-مرحبًا! أنا ريم الغامدي، مصممة ومطورة شغوفة بابتكار أفكار تجمع بين الجمال والبساطة. أحب تحويل التفاصيل الصغيرة إلى تجارب جميلة ومريحة للمستخدم. أؤمن أن التصميم الجيد لا يلفت الانتباه فقط، بل يترك أثرًا. حاليًا أعمل على تطوير مهاراتي في تصميم وتطوير التطبيقات والمواقع، وأسعى دائمًا للتعلّم واكتشاف طرق جديدة للتعبير عن الإبداع  </section>
-</p> 
-  <section id="services">
-    <h2 data-key="services-title">ماذا أقدم</h2>
-    <ul id="services-list">
-      <li>تطوير واجهات المستخدم الخاصة بالتطبيقات والمواقع مع التركيز على تحسين تجربة المستخدم.</li>
-      <li>استخدام جافا، بايثون، سويفت، ودارت في البرمجة.</li>
-      <li>إدارة قواعد البيانات باستخدام SQL.</li>
-      <li>تحليل البيانات لاستخراج الأنماط التي تساهم في تحسين القرارات.</li>
-    </ul>
-  </section>
-
-  <section id="tech">
-    <h2 data-key="tech-title">التقنيات المستخدمة</h2>
-    <div class="tech-list" id="tech-list">
-      <span>PHP</span>
-      <span>MySQL</span>
-      <span>Dart</span>
-      <span>Swift</span>
-      <span>Java</span>
-      <span>JavaScript</span>
-      <span>CSS</span>
-      <span>HTML</span>
-      <span>Angular</span>
-      <span>Python</span>
-      <span>Visual Studio</span>
-      <span>Figma</span>
-		   <span>Xcode</span>
-    </div>
-  </section>
-
-  <section id="work">
-    <h2 data-key="work-title">الأعمال</h2>
-    <div class="work-grid" aria-label="شبكة أعمالي">
-      <div class="work-card">
-	  <a href="imgi\Screen Shot 1445-09-16 at 10.07.50 AM.png">
-        <img src="imgi\Screen Shot 1445-09-16 at 10.07.50 AM.png" alt="مشروع 1: موقع وزارة الاقتصاد والتخطيط" /> </a>
-        <h4 data-key="work-slide1-title">تعديل واجهة موقع تابع لوزارة الاقتصاد والتخطيط</h4>
-        <p data-key="work-slide1-text">عملت على تحسين تجربة المستخدم وتصميم واجهات متميزة، وربط الواجهات بـ API لجلب البيانات بشكل ديناميكي.</p>
-      </div>
-      <div class="work-card">
-	  <a href="imgi\Picture1.png">
-        <img src="imgi\Picture1.png" alt="مشروع 2: معرض أعمال باستخدام Angular" /> </a>
-        <h4 data-key="work-slide2-title">أول موقع طورته باستخدام Angular</h4>
-        <p data-key="work-slide2-text">معرض لأعمالي يتميز بتصميم بسيط وتفاعل سلس مع المستخدم.</p>
-      </div>
-      <div class="work-card">
-	  <a href="imgi\Screenshot 2025-05-19 185426.png">
-        <img src="imgi\Screenshot 2025-05-19 185426.png" alt="مشروع 3: تطبيق سواب جوي" /> </a>
-        <h4 data-key="work-slide3-title">مشروع تخرجي: تطبيق "سواب جوي"</h4>
-        <p data-key="work-slide3-text">تطبيق لتبادل والتبرع بالألعاب، طورته باستخدام لغة دارت، يتيح للمستخدمين استبدال أو التبرع بالألعاب بطريقة سهلة وآمنة.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="certifications">
-    <h2 data-key="contact-title-2">الدورات والشهادات</h2>
-    <div class="certificates-slider" aria-label="سلايدر الشهادات">
-      <div class="certificates-slides" id="certificates-slides">
-
-
-<div class="certificate-slide">
-  <a href="imgi\Screenshot 2025-05-21 012153.png">
-    <img src="imgi\Screenshot 2025-05-21 012153.png" alt="" />
-  </a>
-  <p>Word 2019 Associate</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\certificate (3).png">
-    <img src="imgi\certificate (3).png" alt="UX/UI Design" />
-  </a>
-  <p>UX/UI Design Course</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\certificate (1).png">
-    <img src="imgi\certificate (1).png" alt="Swift" />
-  </a>
-  <p>Swift 1.0 Programming Certificate</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\certificate (2).png">
-    <img src="imgi\certificate (2).png" alt="Swift" />
-  </a>
-  <p>Swift 1.2 Programming Certificate</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\certificate.png">
-    <img src="imgi\certificate.png" alt="Swift" />
-  </a>
-  <p>Swift 1.3 Programming Certificate</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\Screenshot 2025-05-19 184029.png">
-    <img src="imgi\Screenshot 2025-05-19 184029.png" alt="Web Development" />
-  </a>
-  <p>Web Development</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\Screenshot 2025-05-19 172334.png">
-    <img src="imgi\Screenshot 2025-05-19 172334.png" alt="Data Warehouse" />
-  </a>
-  <p>Data Warehouse Course</p>
-</div>
-
-<div class="certificate-slide">
-  <a href="imgi\Screenshot 2025-05-19 184016.png">
-    <img src="imgi\Screenshot 2025-05-19 184016.png" alt="Cyber Security" />
-  </a>
-  <p>Introduction to Cyber Security</p>
-</div>
-
-
-
-      </div>
-      <div class="slider-dots" id="cert-dots" role="tablist" aria-label="نقاط تنقل سلايدر الشهادات"></div>
-    </div>
-  </section>
-</div>
-
-<footer>
-  <div class="footer-contact">
-    <h2 data-key="contact-title">تواصل معي</h2>
-    <ul class="contact-list">
-
-      <li><strong data-key="contact-email-label">البريد الإلكتروني:</strong> <a href="mailto:ireemahmed2@gmail.com">ireemahmed2@gmail.com</a></li>
-      <li><strong data-key="contact-linkedin-label">لينكدإن:</strong> <a href="https://www.linkedin.com/in/reem-alghamdi-723171252">Reem Linkedin</a></li>
-    </ul>
+<div id="menubar">
+  <span style="font-size:13px;font-weight:500;color:var(--text);" class="t" data-ar="ريم الغامدي" data-en="Reem Alghamdi">ريم الغامدي</span>
+  <div class="mb-right">
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">EN</button>
+    <span id="clock"></span>
   </div>
-</footer>
+</div>
+
+<div id="desktop">
+
+  <div id="space-deco" aria-hidden="true">
+    <div class="stars s1"></div>
+    <div class="stars s2"></div>
+    <div class="planet p1"></div>
+    <div class="planet p2"><i class="ring"></i></div>
+    <div class="planet p3"></div>
+    <div class="shooting"></div>
+  </div>
+
+  <div id="hero">
+    <div id="hero-inner">
+      <h1>
+        <span class="t" data-ar="ريم الغامدي" data-en="Reem Alghamdi">ريم الغامدي</span><br>
+        <em class="t" data-ar="تصميم يرضي الاثنين يريح المستخدم ويملي العين ✦" data-en="Look sweet, functionally complete ✦">تصميم يرضي الاثنين يريح المستخدم ويملي العين ✦</em>
+      </h1>
+
+      <p class="hero-about t" data-ar="مصممة واجهات وتجربة مستخدم ومطوّرة تطبيقات. أصمم تجارب رقمية تخدم احتياج المستخدم وتريح العين، وأبنيها من الصفر؛ بدءاً من البحث والتخطيط، وصولاً إلى برمجتها وإطلاقها كتطبيقات جاهزة للاستخدام." data-en="A UI/UX designer and app developer. I craft digital experiences designed for both the user and the eye. I build projects from the ground up—from research and wireframing, to coding and launching them ready for use.">
+        مصممة واجهات وتجربة مستخدم ومطوّرة تطبيقات. أصمم تجارب رقمية تخدم احتياج المستخدم وتريح العين، وأبنيها من الصفر؛ بدءاً من البحث والتخطيط، وصولاً إلى برمجتها وإطلاقها كتطبيقات جاهزة للاستخدام.
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-pill"><div class="n">+8</div><div class="l t" data-ar="مشاريع" data-en="Projects">مشاريع</div></div>
+        <div class="stat-pill"><div class="n">800+</div><div class="l t" data-ar="ساعة كود وتصميم" data-en="Hours of Code & Design">ساعة كود وتصميم</div></div>
+        <div class="stat-pill"><div class="n">500+</div><div class="l t" data-ar="شخص تم إرشادهم تقنياً" data-en="Mentees Guided">شخص تم إرشادهم تقنياً</div></div>
+      </div>
+
+      <div class="hero-block">
+        <div class="hero-label t" data-ar="الأدوات" data-en="Tools">الأدوات</div>
+        <div class="hero-chips">
+          <span class="chip hl">Figma</span><span class="chip hl">Sketch</span>
+          <span class="chip hl">Photoshop</span><span class="chip hl">Canva</span><span class="chip hl">Blender</span>
+          <span class="chip hl">SwiftUI</span><span class="chip hl">Angular</span>
+          <span class="chip hl">TypeScript</span><span class="chip hl">Java</span>
+          <span class="chip hl">HTML / CSS</span><span class="chip hl">Dart</span>
+          <span class="chip hl">VS</span><span class="chip hl">Xcode</span><span class="chip hl">Unity</span>
+          <span class="chip hl">Miro</span><span class="chip hl">Notion</span>
+        </div>
+      </div>
+
+      <div class="hero-block">
+        <div class="hero-label t" data-ar="تواصل" data-en="Contact">تواصل</div>
+        <div class="hero-contact">
+          <a href="mailto:ireemahmed2@gmail.com"><span>✉️</span><span>ireemahmed2@gmail.com</span></a>
+          <a href="https://linkedin.com/in/reem-alghamdi-723171252" target="_blank"><span style="font-weight:600;font-size:12px;">in</span><span>LinkedIn</span></a>
+          <a href="Reem-alghamdi-CvE.pdf" target="_blank"><span>📄</span><span class="t" data-ar="السيرة الذاتية" data-en="Resume">السيرة الذاتية</span></a>
+        </div>
+      </div>
+
+      <div class="hint">
+        <span class="t" data-ar="لتصفح مشاريعي اضغط على الأيقونات بالأسفل" data-en="Browse my projects — click the icons below">لتصفح مشاريعي اضغط على الأيقونات بالأسفل</span>
+        <span>↓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MEMENTO ══ -->
+  <div class="win" id="win-memento" style="width:420px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-memento')" onclick="focusWin('win-memento')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-memento')"></div>
+        <div class="wb wb-min" onclick="minWin('win-memento')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title">Memento</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">
+        <img src="Icons/MementoIcon.png" alt="Memento" style="width: 80%; height: auto; border-radius: 10px;">
+      </div>
+      <div class="strip-name">Memento</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ دوري: تصميم UI/UX كامل" data-en="✦ Role: Full UI/UX Design">✦ دوري: تصميم UI/UX كامل</div>
+      <p class="t" data-ar="تعتمد فكرة تطبيق Memento على مفهوم بسيط وعميق في آنٍ واحد: تدوين ذكرى في مكانٍ محدد، ليُذكّرك التطبيق بها متى ما عدت إليه. قمت بتصميم تجربة المستخدم من الألف إلى الياء؛ بدءًا من إجراء أبحاث المستخدمين ورسم النماذج المبدئية، وصولًا إلى تصميم نموذج تفاعلي على Figma. التطبيق متاح الآن للتحميل على App Store." data-en="Memento is built on a concept that is simple yet profound: capture a memory at a specific place, and the app reminds you of it whenever you return. I designed the user experience end to end — from user research and early wireframes to an interactive Figma prototype. The app is now available on the App Store.">
+        تعتمد فكرة تطبيق Memento على مفهوم بسيط وعميق في آنٍ واحد: تدوين ذكرى في مكانٍ محدد، ليُذكّرك التطبيق بها متى ما عدت إليه. قمت بتصميم تجربة المستخدم من الألف إلى الياء؛ بدءًا من إجراء أبحاث المستخدمين ورسم النماذج المبدئية، وصولًا إلى تصميم نموذج تفاعلي على Figma. التطبيق متاح الآن للتحميل على App Store.
+      </p>
+      <div class="tags"><span class="tag">Figma</span><span class="tag">UX Research</span><span class="tag">Prototyping</span><span class="tag">iOS</span><span class="tag">Location-based</span></div>
+      <div class="win-section-divider"></div>
+      <div class="proj-gallery">
+        <div id="ss-memento" class="slideshow-wrap">
+          <div class="slides-track" id="track-memento">
+            <div class="slide"><img src="Images/memento1.png" alt="Memento 1" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>memento1.png</span></div>'"></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="win-section-divider"></div>
+      <a class="appstore-btn" href="https://apps.apple.com/sa/app/memento-where-youve-been/id6758897827?l=ar" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        <div><span class="abt1">Download on the</span><span class="abt2">App Store</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ══ NEVER BACK ══ -->
+  <div class="win" id="win-neverback" style="width:420px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-neverback')" onclick="focusWin('win-neverback')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-neverback')"></div>
+        <div class="wb wb-min" onclick="minWin('win-neverback')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title">اللا عودة</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">
+        <img src="Icons/NeverBackicon.png" alt="Never Back">
+      </div>
+      <div class="strip-name">اللا عودة</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ دوري: تصميم المشاهد البصرية" data-en="✦ Role: Visual Scene Design">✦ دوري: تصميم المشاهد البصرية</div>
+      <p class="t" data-ar="لا تقتصر «اللا عودة» على كونها لعبة رعب، بل هي تجربة تفاعلية غامرة مستوحاة من صميم البيئة السعودية. تمثّل دوري في هذا المشروع في تأسيس اللغة البصرية للعبة وتصميم البيئات والمشاهد، مع التركيز على خلق تجربة بصرية تجعل اللاعب يستشعر تفاصيل المكان قبل أن يراه." data-en="Never Back is more than a horror game — it's an immersive interactive experience inspired by the heart of the Saudi environment. My role was establishing the game's visual language and designing its environments and scenes, focusing on a visual experience that makes the player sense the place before seeing it.">
+        لا تقتصر «اللا عودة» على كونها لعبة رعب، بل هي تجربة تفاعلية غامرة مستوحاة من صميم البيئة السعودية. تمثّل دوري في هذا المشروع في تأسيس اللغة البصرية للعبة وتصميم البيئات والمشاهد، مع التركيز على خلق تجربة بصرية تجعل اللاعب يستشعر تفاصيل المكان قبل أن يراه.
+      </p>
+      <div class="tags"><span class="tag">Scene Design</span><span class="tag">Visual Design</span><span class="tag">Game UI</span><span class="tag">Saudi Theme</span></div>
+      <div class="win-section-divider"></div>
+      <div class="proj-gallery">
+        <div class="proj-gallery-label t" data-ar="لقطات المشروع" data-en="Project shots">لقطات المشروع</div>
+        <div id="ss-neverback" class="slideshow-wrap">
+          <div class="slides-track" id="track-neverback">
+            <div class="slide"><img src="Images/NEVERBACK1.png" alt="Never Back 1" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback1.png</span></div>'"></div>
+            <div class="slide"><img src="Images/NEVERBACK2.png" alt="Never Back 2" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback2.png</span></div>'"></div>
+            <div class="slide"><img src="Images/NEVERBACK3.png" alt="Never Back 3" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback3.png</span></div>'"></div>
+          </div>
+          <div class="slide-counter-badge" id="cnt-neverback">1 / 3</div>
+          <button class="slide-nav-btn prev" onclick="sGo('neverback',-1)">‹</button>
+          <button class="slide-nav-btn next" onclick="sGo('neverback',1)">›</button>
+        </div>
+        <div class="dots-row" id="dots-neverback">
+          <button class="sdot active" onclick="sGoTo('neverback',0)"></button>
+          <button class="sdot" onclick="sGoTo('neverback',1)"></button>
+          <button class="sdot" onclick="sGoTo('neverback',2)"></button>
+        </div>
+        <div class="thumbs-row" id="thumbs-neverback">
+          <img class="sthumb active" src="Images/NEVERBACK1.png" onclick="sGoTo('neverback',0)" onerror="this.outerHTML='<div class=sthumb-empty>1</div>'">
+          <img class="sthumb" src="Images/NEVERBACK2.png" onclick="sGoTo('neverback',1)" onerror="this.outerHTML='<div class=sthumb-empty>2</div>'">
+          <img class="sthumb" src="Images/NEVERBACK3.png" onclick="sGoTo('neverback',2)" onerror="this.outerHTML='<div class=sthumb-empty>3</div>'">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BULBUL ══ -->
+  <div class="win" id="win-bulbul" style="width:420px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-bulbul')" onclick="focusWin('win-bulbul')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-bulbul')"></div>
+        <div class="wb wb-min" onclick="minWin('win-bulbul')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title t" data-ar="بلبل" data-en="Bulbul">بلبل</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">
+        <img src="Icons/BulbulIcon.png" alt="Bulbul">
+      </div>
+      <div class="strip-name">بلبل</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ تصميم UI/UX + تطوير" data-en="✦ UI/UX Design + Dev">✦ تصميم UI/UX + تطوير</div>
+      <p class="t" data-ar="بلبل يُحوّل تعلّم اللغة العربية إلى لعبة يعيشها الطفل بجسده — عبر محاكاة قصص بالحركات. صمّمت واجهاته كاملةً بتركيز على البهجة والوضوح، وبرمجت بعض شاشاته بنفسي." data-en="Bulbul turns Arabic learning into a game children live with their bodies — through gesture-based story simulation. I designed all its interfaces with a focus on joy and clarity, and coded some of its screens myself.">
+        بلبل يُحوّل تعلّم اللغة العربية إلى لعبة يعيشها الطفل بجسده — عبر محاكاة قصص بالحركات. صمّمت واجهاته كاملةً بتركيز على البهجة والوضوح، وبرمجت بعض شاشاته بنفسي.
+      </p>
+      <div class="tags"><span class="tag">Figma</span><span class="tag">Children UX</span><span class="tag">Flutter</span><span class="tag">EdTech</span></div>
+      <div class="win-section-divider"></div>
+      <img src="Images/BULBUL1.png" alt="Bulbul" style="width:100%;border-radius:10px;display:block;">
+    </div>
+  </div>
+
+  <!-- ══ AMD ══ -->
+  <div class="win" id="win-amd" style="width:360px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-amd')" onclick="focusWin('win-amd')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-amd')"></div>
+        <div class="wb wb-min" onclick="minWin('win-amd')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title">آمد</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">
+        <img src="Icons/AMDIcon.png" alt="AMD">
+      </div>
+      <div class="strip-name">آمد</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ تصميم UI/UX + تطوير" data-en="✦ UI/UX Design + Dev">✦ تصميم UI/UX + تطوير</div>
+      <p class="t" data-ar="آمد يبني جسرًا بصريًا حين تغيب الكلمات — فيديوهات جاهزة للاستخدام في الأماكن العامة تُيسّر التواصل لذوي الإعاقة السمعية. صمّمت واجهاته وبرمجت عددًا من شاشاته." data-en="AMD creates a visual bridge where words are absent — ready-to-use videos in public places that ease communication for the hearing-impaired. I designed the interfaces and coded a number of its screens.">
+        آمد يبني جسرًا بصريًا حين تغيب الكلمات — فيديوهات جاهزة للاستخدام في الأماكن العامة تُيسّر التواصل لذوي الإعاقة السمعية. صمّمت واجهاته وبرمجت عددًا من شاشاته.
+      </p>
+      <div class="tags"><span class="tag">Accessibility</span><span class="tag">UI Design</span><span class="tag">Inclusive</span><span class="tag">Mobile</span></div>
+      <div class="win-section-divider"></div>
+      <div class="proj-gallery">
+        <div class="proj-gallery-label t" data-ar="لقطات المشروع" data-en="Project shots">لقطات المشروع</div>
+        <img src="Images/Amdpicture.png" alt="AMD" style="width:100%;border-radius:10px;display:block;">
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SWAPJOY ══ -->
+  <div class="win" id="win-swapjoy" style="width:360px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-swapjoy')" onclick="focusWin('win-swapjoy')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-swapjoy')"></div>
+        <div class="wb wb-min" onclick="minWin('win-swapjoy')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title">SwapJoy</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">
+        <img src="Icons/SwapJouicon.png" alt="SwapJoy">
+      </div>
+      <div class="strip-name">SwapJoy</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ مشروع تخرج — تصميم + تطوير" data-en="✦ Graduation — Design + Dev">✦ مشروع تخرج — تصميم + تطوير</div>
+      <p class="t" data-ar="يرتكز SwapJoy على مفهوم مستدام يهدف إلى منح ألعاب الأطفال حياةً جديدة. يعمل التطبيق كمنصة تفاعلية تُمكّن الأهالي من تبادل الألعاب أو التبرع بها بسهولة. انصبّ دوري في هذا المشروع على تصميم رحلة المستخدم والواجهات، بالإضافة إلى تحويل هذه التصاميم إلى واقع ملموس عبر برمجة وتطوير عدة شاشات تفاعلية." data-en="SwapJoy is built on a sustainable concept: giving children's toys a new life. The app works as an interactive platform that lets parents easily swap or donate toys. My role focused on designing the user journey and interfaces, then bringing those designs to life by developing several interactive screens.">
+        يرتكز SwapJoy على مفهوم مستدام يهدف إلى منح ألعاب الأطفال حياةً جديدة. يعمل التطبيق كمنصة تفاعلية تُمكّن الأهالي من تبادل الألعاب أو التبرع بها بسهولة. انصبّ دوري في هذا المشروع على تصميم رحلة المستخدم والواجهات، بالإضافة إلى تحويل هذه التصاميم إلى واقع ملموس عبر برمجة وتطوير عدة شاشات تفاعلية.
+      </p>
+      <div class="tags"><span class="tag">Figma</span><span class="tag">UX Research</span><span class="tag">Sustainability</span></div>
+      <div class="win-section-divider"></div>
+      <div class="proj-gallery">
+        <div class="proj-gallery-label t" data-ar="لقطات المشروع" data-en="Project shots">لقطات المشروع</div>
+        <img src="Images/SwapJouPicture.png" alt="SwapJoy" style="width:100%;border-radius:10px;display:block;">
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PORTFOLIO ══ -->
+  <div class="win" id="win-portfolio" style="width:360px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-portfolio')" onclick="focusWin('win-portfolio')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-portfolio')"></div>
+        <div class="wb wb-min" onclick="minWin('win-portfolio')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title t" data-ar="بورتفوليو" data-en="Portfolio">بورتفوليو</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">💼</div>
+      <div class="strip-name">بورتفوليو</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ تصميم + تطوير Angular" data-en="✦ Design + Angular Dev">✦ تصميم + تطوير Angular</div>
+      <p class="t" data-ar="توليت تصميم وتطوير هذا الموقع بالكامل من الصفر؛ حيث بدأت بتخطيط تجربة وواجهة المستخدم (UI/UX) لضمان سهولة الاستخدام، وصولًا إلى برمجته وتحويله إلى واقع ملموس باستخدام إطار العمل Angular، مما ساعدني على تقديم أداء عالٍ وتجربة متكاملة." data-en="I designed and developed this site entirely from scratch — starting with UI/UX planning for ease of use, through to building it with the Angular framework, delivering high performance and a complete experience.">
+        توليت تصميم وتطوير هذا الموقع بالكامل من الصفر؛ حيث بدأت بتخطيط تجربة وواجهة المستخدم (UI/UX) لضمان سهولة الاستخدام، وصولًا إلى برمجته وتحويله إلى واقع ملموس باستخدام إطار العمل Angular، مما ساعدني على تقديم أداء عالٍ وتجربة متكاملة.
+      </p>
+      <div class="tags"><span class="tag">Angular</span><span class="tag">TypeScript</span><span class="tag">HTML/CSS</span></div>
+      <div class="win-section-divider"></div>
+      <img src="Images/Myfirstprortfolio.png" alt="Portfolio" style="width:100%;border-radius:10px;display:block;">
+    </div>
+  </div>
+
+  <!-- ══ GOVERNMENT ══ -->
+  <div class="win" id="win-gov" style="width:380px;">
+    <div class="win-bar" onmousedown="startDrag(event,'win-gov')" onclick="focusWin('win-gov')">
+      <div class="win-btns">
+        <div class="wb wb-close" onclick="closeWin('win-gov')"></div>
+        <div class="wb wb-min" onclick="minWin('win-gov')"></div>
+        <div class="wb wb-max"></div>
+      </div>
+      <div class="win-title t" data-ar="موقع جهة حكومية" data-en="Government Website">موقع جهة حكومية</div>
+    </div>
+    <div class="win-color-strip">
+      <div class="strip-logo">🏛️</div>
+      <div class="strip-name">جهة حكومية</div>
+    </div>
+    <div class="win-body">
+      <div class="win-role-badge t" data-ar="✦ تصميم UI/UX + تطوير + API" data-en="✦ UI/UX + Dev + API">✦ تصميم UI/UX + تطوير + API</div>
+      <p class="t" data-ar="عملتُ على تطوير موقع جهة حكومية وتحسين تجربة مستخدميه — أعدتُ تصميم واجهاته، وصقلتُ مسارات التنقل، وربطت الواجهات بـ APIs لتغذيتها بالبيانات ديناميكيًا دون الحاجة لإعادة تحميل الصفحة." data-en="I worked on developing a government website and improving its user experience — redesigned its interfaces, refined navigation flows, and connected the frontend to APIs for dynamic data without page reloads.">
+        عملتُ على تطوير موقع جهة حكومية وتحسين تجربة مستخدميه — أعدتُ تصميم واجهاته، وصقلتُ مسارات التنقل، وربطت الواجهات بـ APIs لتغذيتها بالبيانات ديناميكيًا دون الحاجة لإعادة تحميل الصفحة.
+      </p>
+      <div class="tags"><span class="tag">UX Design</span><span class="tag">Angular</span><span class="tag">REST API</span></div>
+    </div>
+  </div>
+
+</div><!-- /desktop -->
+
+<!-- ══ DOCK ══ -->
+<div id="dock">
+  <div class="dapp" onclick="openWin('win-memento')" id="dock-memento">
+    <div class="dapp-label">Memento</div>
+    <div class="dapp-icon">
+      <img src="Icons/MementoIcon.png" alt="Memento" style="width:70%;height:auto;border-radius:0px;">
+    </div>
+    <div class="dapp-dot"></div>
+  </div>
+  <div class="dapp" onclick="openWin('win-neverback')" id="dock-neverback">
+    <div class="dapp-label">Never Back</div>
+    <div class="dapp-icon ic-horror">
+      <img src="Icons/NeverBackicon.png" alt="Never Back">
+    </div>
+    <div class="dapp-dot"></div>
+  </div>
+  <div class="dapp" onclick="openWin('win-bulbul')" id="dock-bulbul">
+    <div class="dapp-label t" data-ar="بلبل" data-en="Bulbul">بلبل</div>
+    <div class="dapp-icon ic-sky">
+      <img src="Icons/BulbulIcon.png" alt="Bulbul" style="width:90%;height:auto;">
+    </div>
+    <div class="dapp-dot"></div>
+  </div>
+  <div class="dapp" onclick="openWin('win-amd')" id="dock-amd">
+    <div class="dapp-label">AMD</div>
+    <div class="dapp-icon ic-sky">
+      <img src="Icons/AMDIcon.png" alt="AMD">
+    </div>
+    <div class="dapp-dot"></div>
+  </div>
+  <div class="dapp" onclick="openWin('win-swapjoy')" id="dock-swapjoy">
+    <div class="dapp-label">SwapJoy</div>
+    <div class="dapp-icon">
+      <img src="Icons/SwapJouicon.png" alt="SwapJoy" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <div class="dapp-dot"></div>
+  </div>
+  <div class="dapp" onclick="openWin('win-portfolio')" id="dock-portfolio">
+    <div class="dapp-label t" data-ar="بورتفوليو" data-en="Portfolio">بورتفوليو</div>
+    <div class="dapp-icon ic-neutral">💼</div>
+    <div class="dapp-dot"></div>
+  </div>
+  <div class="dapp" onclick="openWin('win-gov')" id="dock-gov">
+    <div class="dapp-label t" data-ar="حكومي" data-en="Gov">حكومي</div>
+    <div class="dapp-icon ic-neutral">🏛️</div>
+    <div class="dapp-dot"></div>
+  </div>
+</div>
 
 <script>
-  const translations = {
-    ar: {
-      "nav-about": "من أنا",
-      "nav-services": "ماذا أقدم",
-      "nav-tech": "التقنيات المستخدمة",
-      "nav-work": "الأعمال",
-      "nav-contact-2": "الدورات والشهادات",
-      "about-title": "من أنا",
-"about-text": "مرحبًا! أنا ريم الغامدي، مصممة ومطورة شغوفة بابتكار أفكار تجمع بين الجمال والبساطة. أحب تحويل التفاصيل الصغيرة إلى تجارب جميلة ومريحة للمستخدم. أؤمن أن التصميم الجيد لا يلفت الانتباه فقط، بل يترك أثرًا. حاليًا أعمل على تطوير مهاراتي في تصميم وتطوير التطبيقات والمواقع، وأسعى دائمًا للتعلّم واكتشاف طرق جديدة للتعبير عن الابداع.",      "services-title": "ماذا أقدم",
-      "services-list": [
-        "تطوير واجهات المستخدم الخاصة بالتطبيقات والمواقع مع التركيز على تحسين تجربة المستخدم.",
-        "استخدام جافا، بايثون، سويفت، ودارت في البرمجة.",
-        "إدارة قواعد البيانات باستخدام SQL.",
-        "تحليل البيانات لاستخراج الأنماط التي تساهم في تحسين القرارات."
-      ],
-      "tech-title": "التقنيات المستخدمة",
-      "work-title": "الأعمال",
-      "work-slide1-title": "تعديل واجهة موقع تابع لوزارة الاقتصاد والتخطيط",
-      "work-slide1-text": "عملت على تحسين تجربة المستخدم وتصميم واجهات متميزة، وربط الواجهات بـ API لجلب البيانات بشكل ديناميكي.",
-      "work-slide2-title": "أول موقع طورته باستخدام Angular",
-      "work-slide2-text": "معرض لأعمالي يتميز بتصميم بسيط وتفاعل سلس مع المستخدم.",
-      "work-slide3-title": "مشروع تخرجي: تطبيق \"سواب جوي\"",
-      "work-slide3-text": "تطبيق لتبادل والتبرع بالألعاب، طورته باستخدام لغة دارت، يتيح للمستخدمين استبدال أو التبرع بالألعاب بطريقة سهلة وآمنة.",
-      "contact-title-2": "الدورات والشهادات",
-      "contact-title": "تواصل معي",
-  
-      "contact-email-label": "البريد الإلكتروني:",
-      "contact-linkedin-label": "لينكدإن:"
-    },
-    en: {
-      "nav-about": "About Me",
-      "nav-services": "What I Offer",
-      "nav-tech": "Technologies",
-      "nav-work": "Work",
-      "nav-contact-2": "Courses & Certifications",
-      "about-title": "About Me",
-      "about-text": "Hi! I’m Reem Alghamdi — a designer and developer passionate about creating ideas that blend beauty and simplicity. I love turning small details into smooth and delightful user experiences. I believe good design doesn’t just catch the eye, it leaves an impression. I’m currently growing my skills in app and web development, always exploring new ways to express creativity.",
-      "services-title": "What I Offer",
-      "services-list": [
-        "Developing user interfaces for applications and websites with a focus on improving user experience.",
-        "Using Java, Python, Swift, and Dart for programming.",
-        "Managing databases using SQL.",
-        "Analyzing data to extract patterns that help improve decisions."
-      ],
-      "tech-title": "Technologies",
-      "work-title": "Work",
-      "work-slide1-title": "UI update for Ministry of Economy and Planning website",
-      "work-slide1-text": "Improved user experience and designed distinctive interfaces, connecting them dynamically with APIs.",
-      "work-slide2-title": "My first site developed using Angular",
-      "work-slide2-text": "A portfolio website featuring a simple design and smooth user interaction.",
-      "work-slide3-title": "Graduation Project: Swap Joy App",
-      "work-slide3-text": "An app for exchanging and donating games, developed with Dart, allowing users to easily and securely swap or donate games.",
-      "contact-title-2": "Courses & Certifications",
-      "contact-title": "Contact Me",
+/* ── SLIDESHOW ── */
+const sState = {};
+function sInit(id){
+  if(sState[id])return;
+  const track=document.getElementById('track-'+id);
+  if(!track)return;
+  sState[id]={cur:0,total:track.children.length};
+}
+function sUpdate(id){
+  sInit(id);
+  const s=sState[id];
+  document.getElementById('track-'+id).style.transform='translateX(-'+(s.cur*100)+'%)';
+  const cnt=document.getElementById('cnt-'+id);
+  if(cnt)cnt.textContent=(s.cur+1)+' / '+s.total;
+  const dotsEl=document.getElementById('dots-'+id);
+  if(dotsEl)dotsEl.querySelectorAll('.sdot').forEach((d,i)=>d.classList.toggle('active',i===s.cur));
+  const thumbsEl=document.getElementById('thumbs-'+id);
+  if(thumbsEl)thumbsEl.querySelectorAll('.sthumb').forEach((t,i)=>t.classList.toggle('active',i===s.cur));
+}
+function sGo(id,dir){sInit(id);const s=sState[id];s.cur=(s.cur+dir+s.total)%s.total;sUpdate(id);}
+function sGoTo(id,idx){sInit(id);sState[id].cur=idx;sUpdate(id);}
+['memento','neverback'].forEach(id=>{sInit(id);sUpdate(id);});
 
-      "contact-email-label": "Email:",
-      "contact-linkedin-label": "LinkedIn:"
-    }
-  };
+/* ── CLOCK ── */
+function updateClock(){
+  document.getElementById('clock').textContent=
+    new Date().toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});
+}
+updateClock();setInterval(updateClock,1000);
 
-  let currentLang = 'ar';
+/* ── LANGUAGE ── */
+let lang='ar';
+function toggleLang(){
+  lang=lang==='ar'?'en':'ar';
+  document.body.classList.toggle('en',lang==='en');
+  document.getElementById('langBtn').textContent=lang==='ar'?'EN':'عربي';
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{el.innerHTML=el.getAttribute('data-'+lang);});
+}
 
-  function updateTexts() {
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+/* ── WINDOW MANAGER ── */
+let zTop=500;
+const winMap={
+  'win-memento':'dock-memento','win-neverback':'dock-neverback',
+  'win-bulbul':'dock-bulbul','win-amd':'dock-amd',
+  'win-swapjoy':'dock-swapjoy','win-portfolio':'dock-portfolio','win-gov':'dock-gov',
+};
 
-    document.querySelectorAll('[data-key]').forEach(el => {
-      const key = el.getAttribute('data-key');
-      if(translations[currentLang][key]) {
-        el.innerHTML = translations[currentLang][key].replace(/\n/g, '<br>');
-      }
-    });
-
-    const container = document.getElementById('container');
-    container.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
-    const aboutText = document.getElementById('about-text');
-    aboutText.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
-
-    const servicesList = document.getElementById('services-list');
-    servicesList.innerHTML = '';
-    translations[currentLang]["services-list"].forEach(item => {
-      const li = document.createElement('li');
-      li.textContent = item;
-      servicesList.appendChild(li);
-    });
-    servicesList.style.direction = currentLang === 'ar' ? 'rtl' : 'ltr';
-    servicesList.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
-
-    const contactList = document.querySelector('footer .contact-list');
-    contactList.style.direction = currentLang === 'ar' ? 'rtl' : 'ltr';
-    contactList.style.textAlign = currentLang === 'ar' ? 'right' : 'left';
-    contactList.querySelectorAll('li strong').forEach((strong, i) => {
-      const keys = ["contact-email-label", "contact-linkedin-label"];
-      strong.textContent = translations[currentLang][keys[i]];
-    });
-
-    const langSwitchBtn = document.getElementById('lang-switch');
-    langSwitchBtn.textContent = currentLang === 'ar' ? 'English' : 'العربية';
-
-    const workCards = document.querySelectorAll('.work-card h3');
-    const workTexts = document.querySelectorAll('.work-card p');
-    if(currentLang === 'ar') {
-      workCards[0].textContent = translations.ar["work-slide1-title"];
-      workTexts[0].textContent = translations.ar["work-slide1-text"];
-      workCards[1].textContent = translations.ar["work-slide2-title"];
-      workTexts[1].textContent = translations.ar["work-slide2-text"];
-      workCards[2].textContent = translations.ar["work-slide3-title"];
-      workTexts[2].textContent = translations.ar["work-slide3-text"];
-    } else {
-      workCards[0].textContent = translations.en["work-slide1-title"];
-      workTexts[0].textContent = translations.en["work-slide1-text"];
-      workCards[1].textContent = translations.en["work-slide2-title"];
-      workTexts[1].textContent = translations.en["work-slide2-text"];
-      workCards[2].textContent = translations.en["work-slide3-title"];
-      workTexts[2].textContent = translations.en["work-slide3-text"];
-    }
-
-    // تحديث اتجاه النافقيشن بار والعناوين داخله
-    const nav = document.querySelector('nav');
-    const navLinks = nav.querySelectorAll('a');
-    if(currentLang === 'ar') {
-      nav.style.direction = 'rtl';
-      navLinks.forEach(link => link.style.textAlign = 'right');
-    } else {
-      nav.style.direction = 'ltr';
-      navLinks.forEach(link => link.style.textAlign = 'left');
-    }
+function openWin(id){
+  const w=document.getElementById(id);
+  if(!w)return;
+  w.style.transform='';
+  if(!w._placed){
+    w._placed=true;
+    const ww=parseInt(w.style.width)||400;
+    w.style.left=((window.innerWidth-ww)/2+Math.random()*60-30)+'px';
+    w.style.top=(60+Math.random()*60)+'px';
+    w.style.right='auto';
   }
+  w.classList.add('visible');
+  focusWin(id);
+  const dk=winMap[id];
+  if(dk)document.getElementById(dk)?.classList.add('open');
+}
+function closeWin(id){
+  const w=document.getElementById(id);
+  w.classList.remove('visible','focused');
+  const dk=winMap[id];
+  if(dk)document.getElementById(dk)?.classList.remove('open');
+}
+function minWin(id){closeWin(id);}
+function focusWin(id){
+  document.querySelectorAll('.win.focused').forEach(w=>w.classList.remove('focused'));
+  const w=document.getElementById(id);
+  w.style.zIndex=++zTop;
+  w.classList.add('focused');
+}
 
-  document.getElementById('lang-switch').addEventListener('click', () => {
-    currentLang = currentLang === 'ar' ? 'en' : 'ar';
-    updateTexts();
+/* ── DRAG ── */
+let drag=null;
+function startDrag(e,id){
+  if(e.button!==0)return;
+  focusWin(id);
+  const w=document.getElementById(id);
+  const rect=w.getBoundingClientRect();
+  drag={id,ox:e.clientX-rect.left,oy:e.clientY-rect.top};
+  e.preventDefault();
+}
+document.addEventListener('mousemove',e=>{
+  if(!drag)return;
+  const w=document.getElementById(drag.id);
+  let x=e.clientX-drag.ox;
+  let y=e.clientY-drag.oy;
+  x=Math.max(0,Math.min(x,window.innerWidth-w.offsetWidth));
+  y=Math.max(44,Math.min(y,window.innerHeight-80));
+  w.style.left=x+'px';
+  w.style.top=y+'px';
+  w.style.right='auto';
+});
+document.addEventListener('mouseup',()=>{drag=null;});
+
+document.getElementById('desktop').addEventListener('click',e=>{
+  if(e.target.id==='desktop'||e.target.id==='hero'||e.target.id==='hero-inner'){
+    document.querySelectorAll('.win.focused').forEach(w=>w.classList.remove('focused'));
+  }
+});
+
+/* ── سحب السلايدات باللمس (للجوال) ── */
+document.querySelectorAll('.slideshow-wrap').forEach(wrap=>{
+  let sx=null;
+  wrap.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+  wrap.addEventListener('touchend',e=>{
+    if(sx===null)return;
+    const dx=e.changedTouches[0].clientX-sx;
+    sx=null;
+    if(Math.abs(dx)<40)return;
+    const id=wrap.id.replace('ss-','');
+    if(sState[id]&&sState[id].total>1)sGo(id,dx<0?1:-1);
+  },{passive:true});
+});
+
+/* ── تكبير الصور (Lightbox) ── */
+const lightbox=document.createElement('div');
+lightbox.id='lightbox';
+lightbox.innerHTML='<button class="lb-close" aria-label="إغلاق">✕</button><img alt="">';
+document.body.appendChild(lightbox);
+function closeLightbox(){lightbox.classList.remove('show');}
+lightbox.addEventListener('click',closeLightbox);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+
+let swipeMoved=false;
+document.querySelectorAll('.slideshow-wrap').forEach(wrap=>{
+  wrap.addEventListener('touchmove',()=>{swipeMoved=true;},{passive:true});
+  wrap.addEventListener('touchend',()=>{setTimeout(()=>{swipeMoved=false;},350);},{passive:true});
+});
+
+document.querySelectorAll('.slide img, .proj-gallery > img, .win-body > img').forEach(img=>{
+  img.classList.add('zoomable');
+  img.addEventListener('click',()=>{
+    if(swipeMoved)return; /* لا تفتح التكبير بعد السحب */
+    lightbox.querySelector('img').src=img.src;
+    lightbox.classList.add('show');
   });
+});
 
-  window.addEventListener('DOMContentLoaded', () => {
-    updateTexts();
+document.querySelectorAll('.dapp').forEach(d=>{
+  d.addEventListener('dblclick',()=>{
+    const ic=d.querySelector('.dapp-icon');
+    ic.animate([
+      {transform:'translateY(0)'},{transform:'translateY(-18px)'},
+      {transform:'translateY(0)'},{transform:'translateY(-10px)'},{transform:'translateY(0)'}
+    ],{duration:400,easing:'ease'});
   });
-
-  // سلايدر الشهادات مع انتقال تلقائي ونقاط تنقل
-
-  const slidesContainer = document.getElementById('certificates-slides');
-  const slides = document.querySelectorAll('.certificate-slide');
-  const dotsContainer = document.getElementById('cert-dots');
-
-  let currentSlide = 0;
-
-  // إنشاء نقاط التنقل بناءً على عدد الشرائح
-  function createDots() {
-    dotsContainer.innerHTML = '';
-    slides.forEach((_, index) => {
-      const dot = document.createElement('button');
-      dot.setAttribute('aria-label', `Slide ${index + 1}`);
-      dot.setAttribute('role', 'tab');
-      dot.classList.add('dot-btn');
-      if(index === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        goToSlide(index);
-        resetAutoSlide();
-      });
-      dotsContainer.appendChild(dot);
-    });
-  }
-
-  // الذهاب لشريحة معينة
-  function goToSlide(index) {
-    currentSlide = index;
-    const slideWidth = slides[0].offsetWidth + 20; // عرض الشريحة + الفجوة (gap)
-    slidesContainer.style.transform = `translateX(-${slideWidth * currentSlide}px)`;
-    updateDots();
-  }
-
-  // تحديث حالة النقاط (تفعيل/تعطيل)
-  function updateDots() {
-    const dots = dotsContainer.querySelectorAll('button');
-    dots.forEach(dot => dot.classList.remove('active'));
-    if(dots[currentSlide]) dots[currentSlide].classList.add('active');
-  }
-
-  // انتقال تلقائي كل 5 ثواني
-  let autoSlideInterval = setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    goToSlide(currentSlide);
-  }, 5000);
-
-  function resetAutoSlide() {
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(() => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      goToSlide(currentSlide);
-    }, 5000);
-  }
-
-  // بدء العمل
-  createDots();
-  goToSlide(0);
+});
 </script>
-
 </body>
 </html>
-
-
