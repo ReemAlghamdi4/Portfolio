@@ -246,8 +246,9 @@ body.en #hero h1 em{font-style:italic;font-family:'Playfair Display',serif;}
   .planet.p3{top:22%;right:8%;}
   .shooting{display:none;}
 
-  /* الصور تظهر كاملة وأكبر على الجوال */
-  .slide{height:52vh;max-height:440px;}
+  /* الصور تظهر كاملة على الجوال — تدفق طبيعي بدون تمدد نسبي (يتجنب خلل سفاري) */
+  .slide{height:auto;min-height:120px;}
+  .slide img{height:auto;max-height:58vh;}
 
   /* الـ Dock يتوسّط ويسمح بالتمرير الأفقي عند الحاجة */
   #dock{left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 16px);bottom:10px;padding:8px 10px;gap:8px;overflow-x:auto;justify-content:flex-start;border-radius:18px;}
@@ -355,7 +356,7 @@ body.en #hero h1 em{font-style:italic;font-family:'Playfair Display',serif;}
       <div class="proj-gallery">
         <div id="ss-memento" class="slideshow-wrap">
           <div class="slides-track" id="track-memento">
-            <div class="slide"><img src="Images/memento1.jpg" alt="Memento 1" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>memento1.png</span></div>'"></div>
+            <div class="slide"><img src="Images/memento1.png" alt="Memento 1" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>memento1.png</span></div>'"></div>
           </div>
         </div>
 
@@ -395,9 +396,9 @@ body.en #hero h1 em{font-style:italic;font-family:'Playfair Display',serif;}
         <div class="proj-gallery-label t" data-ar="لقطات المشروع" data-en="Project shots">لقطات المشروع</div>
         <div id="ss-neverback" class="slideshow-wrap">
           <div class="slides-track" id="track-neverback">
-            <div class="slide"><img src="Images/NEVERBACK1.jpg" alt="Never Back 1" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback1.png</span></div>'"></div>
-            <div class="slide"><img src="Images/NEVERBACK2.jpg" alt="Never Back 2" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback2.png</span></div>'"></div>
-            <div class="slide"><img src="Images/NEVERBACK3.jpg" alt="Never Back 3" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback3.png</span></div>'"></div>
+            <div class="slide"><img src="Images/NEVERBACK1.png" alt="Never Back 1" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback1.png</span></div>'"></div>
+            <div class="slide"><img src="Images/NEVERBACK2.png" alt="Never Back 2" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback2.png</span></div>'"></div>
+            <div class="slide"><img src="Images/NEVERBACK3.png" alt="Never Back 3" onerror="this.parentElement.innerHTML='<div class=slide-empty-inner><span>🖼️</span><span>neverback3.png</span></div>'"></div>
           </div>
           <div class="slide-counter-badge" id="cnt-neverback">1 / 3</div>
           <button class="slide-nav-btn prev" onclick="sGo('neverback',-1)">‹</button>
@@ -409,9 +410,9 @@ body.en #hero h1 em{font-style:italic;font-family:'Playfair Display',serif;}
           <button class="sdot" onclick="sGoTo('neverback',2)"></button>
         </div>
         <div class="thumbs-row" id="thumbs-neverback">
-          <img class="sthumb active" src="Images/NEVERBACK1.jpg" onclick="sGoTo('neverback',0)" onerror="this.outerHTML='<div class=sthumb-empty>1</div>'">
-          <img class="sthumb" src="Images/NEVERBACK2.jpg" onclick="sGoTo('neverback',1)" onerror="this.outerHTML='<div class=sthumb-empty>2</div>'">
-          <img class="sthumb" src="Images/NEVERBACK3.jpg" onclick="sGoTo('neverback',2)" onerror="this.outerHTML='<div class=sthumb-empty>3</div>'">
+          <img class="sthumb active" src="Images/NEVERBACK1.png" onclick="sGoTo('neverback',0)" onerror="this.outerHTML='<div class=sthumb-empty>1</div>'">
+          <img class="sthumb" src="Images/NEVERBACK2.png" onclick="sGoTo('neverback',1)" onerror="this.outerHTML='<div class=sthumb-empty>2</div>'">
+          <img class="sthumb" src="Images/NEVERBACK3.png" onclick="sGoTo('neverback',2)" onerror="this.outerHTML='<div class=sthumb-empty>3</div>'">
         </div>
       </div>
     </div>
@@ -438,7 +439,7 @@ body.en #hero h1 em{font-style:italic;font-family:'Playfair Display',serif;}
       <p class="t" data-ar="بلبل يُحوّل تعلّم اللغة العربية إلى لعبة يعيشها الطفل بجسده — عبر محاكاة قصص بالحركات. صمّمت واجهاته كاملةً بتركيز على البهجة والوضوح، وبرمجت بعض شاشاته بنفسي." data-en="Bulbul turns Arabic learning into a game children live with their bodies — through gesture-based story simulation. I designed all its interfaces with a focus on joy and clarity, and coded some of its screens myself.">
         بلبل يُحوّل تعلّم اللغة العربية إلى لعبة يعيشها الطفل بجسده — عبر محاكاة قصص بالحركات. صمّمت واجهاته كاملةً بتركيز على البهجة والوضوح، وبرمجت بعض شاشاته بنفسي.
       </p>
-      <div class="tags"><span class="tag">Figma</span><span class="tag">Children UX</span><span class="tag">Flutter</span><span class="tag">EdTech</span></div>
+      <div class="tags"><span class="tag">Figma</span><span class="tag">Children UX</span><span class="tag">EdTech</span></div>
       <div class="win-section-divider"></div>
       <img src="Images/BULBUL1.png" alt="Bulbul" style="width:100%;border-radius:10px;display:block;">
     </div>
